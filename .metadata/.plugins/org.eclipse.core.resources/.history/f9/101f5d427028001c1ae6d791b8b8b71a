@@ -1,0 +1,29 @@
+package com.rafaeldeluca;
+
+public class AgeOfEmpires implements Controle{
+
+	@Override
+	public void setBotaoX() {	
+		
+		System.out.println("Chute Fraco");
+		
+	}
+
+	@Override
+	public void setBotaoA() {	
+		
+		System.out.println("Ataque de espada");
+		
+	}
+
+	@Override
+	public void setBotaoB() {		
+		
+	}
+
+	@Override
+	public void setBotaoY() {		
+		
+	}
+
+}

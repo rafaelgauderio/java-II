@@ -1,0 +1,7 @@
+package com.rafaeldeluca;
+
+public interface StreetFighter {
+
+	public void setBotaoX();
+
+}

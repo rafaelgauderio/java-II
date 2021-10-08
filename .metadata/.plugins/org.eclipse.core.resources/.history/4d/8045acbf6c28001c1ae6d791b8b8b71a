@@ -1,0 +1,22 @@
+package com.rafaeldeluca;
+
+public class Main {
+
+	public static void main(String[] args) {
+	//static -> não depende de um objeto para disparar um membro static
+	//Senão teria que instanciar um objeto. Objeto sempre depende de uma classe no java
+	//Toda classe é filha da classe Object (tem algums métodos prontos)
+	
+		Pessoa rafael = new Pessoa();
+		
+		rafael.setNome("Rafael De Luca");
+		
+		System.out.println(rafael);
+		
+		
+			
+		
+
+	}
+
+}

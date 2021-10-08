@@ -1,0 +1,29 @@
+package com.rafaeldeluca;
+
+public class StreetFighter implements Controle {
+
+	@Override
+	public void setBotaoX() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setBotaoA() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setBotaoB() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setBotaoY() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
