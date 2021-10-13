@@ -3,4 +3,9 @@
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="com.rafaeldeluca.util.Endereco"/>
     <fullyQualifiedTypeName name="com.rafaeldeluca.Controle"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="jdk.internal.jline.internal.TestAccessible"/>
+    <fullyQualifiedTypeName name="com.sun.org.apache.bcel.internal.generic.F2D"/>
 </qualifiedTypeNameHistroy>
