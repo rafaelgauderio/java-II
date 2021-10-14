@@ -11,11 +11,17 @@ public class FuncionarioTeste {
 
 		Funcionario f1 = new Funcionario();
 		Funcionario f2 = new Funcionario();
+		
+		Data d1 = new Data();
+		Data d2 = new Data();
 
 		f1.setNome("Rafael de Luca");
 		f1.setDepartamento("Desenvolvedores");
 		f1.setSalario(1000);
-		f1.setDataEntrada("01/02/2015");
+		d1.setAno(2015);
+		d1.setMes(12);
+		d1.setDia(24);
+		f1.setDataEntrada(d1);
 		f1.setRg("304509871239");
 		f1.setEstaNaEmpresa(true);
 		f1.bonifica(100);
@@ -25,7 +31,10 @@ public class FuncionarioTeste {
 		f2.setNome("Cristina da Silva");
 		f2.setDepartamento("Recepção");
 		f2.setSalario(2500);
-		f2.setDataEntrada("15/03/2016");
+		d2.setAno(2017);
+		d2.setMes(07);
+		d2.setDia(01);
+		f2.setDataEntrada(d2);
 		f2.setRg("43249871239");
 		f2.setEstaNaEmpresa(true);
 		f2.bonifica(300);
@@ -67,6 +76,9 @@ public class FuncionarioTeste {
 		System.out.println("\n--testar igualdade--");
 		testaFuncionariosIguais();
 		testaFuncionariosComMesmaReferencia();
+		
+		System.out.println("\n--testar data");
+		testaDataEntrada();
 
 
 	}
@@ -104,6 +116,38 @@ public class FuncionarioTeste {
 		}
 		else {
 			System.out.println("Os funcionários são diferentes");
-		}
+		}		
+		
+		
 	}
+	
+	public static void testaDataEntrada() {
+		
+		Funcionario f3 = new Funcionario();
+		Data d3 = new Data();
+		
+		f3.setNome("João da Silva");
+		f3.setDepartamento("Gerente");
+		f3.setSalario(2300);		
+		f3.setRg("304509871239");
+		f3.setEstaNaEmpresa(true);
+		
+		System.out.println("--Antes de atribuir data--");
+		f3.mostra();
+		
+		d3.setAno(2014);
+		d3.setMes(03);
+		d3.setDia(01);
+		f3.setDataEntrada(d3);
+		System.out.println("--Após de atribuir data--");
+		f3.mostra();
+		
+		
+		
+		
+		
+		
+	}
+	
+	
 }

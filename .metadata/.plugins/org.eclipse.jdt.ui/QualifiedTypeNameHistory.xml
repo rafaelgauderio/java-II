@@ -8,4 +8,7 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="jdk.internal.jline.internal.TestAccessible"/>
     <fullyQualifiedTypeName name="com.sun.org.apache.bcel.internal.generic.F2D"/>
+    <fullyQualifiedTypeName name="exercicio_revisao.ContaCorrente"/>
+    <fullyQualifiedTypeName name="java.util.Locale"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
 </qualifiedTypeNameHistroy>

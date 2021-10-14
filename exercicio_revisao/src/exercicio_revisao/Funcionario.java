@@ -5,7 +5,7 @@ public class Funcionario {
 	private String nome;
 	private String departamento;
 	private double salario;
-	private String dataEntrada;
+	private Data dataEntrada=(new Data (00,00,2000));
 	private String rg;
 	private boolean estaNaEmpresa=true;
 	
@@ -14,7 +14,7 @@ public class Funcionario {
 				
 	}
 
-	public Funcionario(String nome, String departamento, double salario, String dataEntrada, String rg,
+	public Funcionario(String nome, String departamento, double salario, Data dataEntrada, String rg,
 			boolean estaNaEmpresa) {
 		super();
 		this.nome = nome;
@@ -49,11 +49,11 @@ public class Funcionario {
 		this.salario = salario;
 	}
 
-	public String getDataEntrada() {
+	public Data getDataEntrada() {
 		return dataEntrada;
 	}
 
-	public void setDataEntrada(String dataEntrada) {
+	public void setDataEntrada(Data dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
@@ -89,8 +89,8 @@ public class Funcionario {
 		
 		System.out.println("Nome:" + this.nome);
 		System.out.println("Departamento: " +this.departamento);
-		System.out.println("Salário: " +this.salario);
-		System.out.println("Data de entrada: " +this.dataEntrada);
+		System.out.println("Salário: " +this.salario);		
+		System.out.println("Data de entrada: " +this.dataEntrada);		
 		System.out.println("RG: " +this.rg);
 		System.out.println("Funcionário está na empresa: " +this.estaNaEmpresa);		
 		
@@ -106,7 +106,8 @@ public class Funcionario {
 	}
 
 	@Override
-	public String toString() {
+	public String toString() {		
+		
 		return "Funcionario [nome=" + nome + ", departamento=" + departamento + ", salário=" + String.format("R$%.2f", salario)
 				+ "\n\t\tData de entrada=" + dataEntrada + ", RG=" + rg + ", Está na empresa=" + estaNaEmpresa + "]";
 	}	
