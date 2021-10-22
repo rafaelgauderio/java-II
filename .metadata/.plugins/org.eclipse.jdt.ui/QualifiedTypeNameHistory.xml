@@ -4,8 +4,6 @@
     <fullyQualifiedTypeName name="com.rafaeldeluca.util.Endereco"/>
     <fullyQualifiedTypeName name="com.rafaeldeluca.Controle"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="jdk.internal.jline.internal.TestAccessible"/>
     <fullyQualifiedTypeName name="com.sun.org.apache.bcel.internal.generic.F2D"/>
     <fullyQualifiedTypeName name="exercicio_revisao.ContaCorrente"/>
@@ -20,4 +18,7 @@
     <fullyQualifiedTypeName name="org.junit.Test"/>
     <fullyQualifiedTypeName name="org.junit.Assert"/>
     <fullyQualifiedTypeName name="application.StringUtil"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="jdk.nashorn.internal.runtime.ListAdapter"/>
 </qualifiedTypeNameHistroy>

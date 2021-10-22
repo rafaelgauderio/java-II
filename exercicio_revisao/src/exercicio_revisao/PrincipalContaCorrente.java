@@ -1,7 +1,10 @@
 package exercicio_revisao;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 
 
 public class PrincipalContaCorrente {
@@ -11,43 +14,58 @@ public class PrincipalContaCorrente {
 	static double valorDeposito=0;
 	static double valorSaque=0;
 	static int opcao = 0;
+	static List<ContaCorrente> listaContas = new ArrayList<ContaCorrente>(5);
+
 
 
 	public static void main(String[] args) {
 
+		
+		ContaCorrente conta = new ContaCorrente();
+
 		try {
 
+
+
 			Scanner sc = new Scanner (System.in);
-			menu();		
-			opcao= Integer.parseInt(sc.nextLine());
 
-			switch (opcao) {
-			case 1:
-				execCadastrar();
-				execConsulta();
-				break;
-			case 2:				
-				execDeposito();	
-				execConsulta();
-				break;
+			opcao=1;
 
-			case 3:				
-				execSaque();
-				execConsulta();
-				break;
-			case 4:
-				execConsulta();
-				break;
-			case 5:
-				System.out.println("Fechando o sistema!");
-				break;
-			default:
-				System.out.println("Informaste um número inválido. Informe um valor entre 1-5");
+			while (opcao!=5) {
+
+				menu();		
+				opcao= Integer.parseInt(sc.nextLine());
+
+				switch (opcao) {
+				case 1:
+					execCadastrar();
+					execConsulta();
+					break;
+				case 2:				
+					execDeposito();	
+					execConsulta();
+					break;
+
+				case 3:				
+					execSaque();
+					execConsulta();
+					break;
+				case 4:
+					execConsulta();
+					break;
+				case 5:
+					System.out.println("Fechando o sistema!");
+					break;
+				default:
+					System.out.println("Informaste um número inválido. Informe um valor entre 1-5");
+
+				}
+
 
 			}	
 
 
-			sc.close();
+
 		} catch (NumberFormatException error ) {
 			error.printStackTrace();
 		}
@@ -63,8 +81,9 @@ public class PrincipalContaCorrente {
 		Scanner sc = new Scanner(System.in);
 		conta.setNomeCliente(sc.nextLine());
 		conta.setAgencia(sc.nextLong());
-		conta.setConta(sc.nextLong());		
-		sc.close();
+		conta.setConta(sc.nextLong());
+		
+		
 
 	}
 
@@ -72,6 +91,11 @@ public class PrincipalContaCorrente {
 
 		System.out.println("\n--DADOS DO CORRENTISTA--");
 		conta.imprimir();
+		
+		System.out.println("--IMPRIMINDO TODAS AS CONTAS--");
+		for(int i=0; i<listaContas.size(); i++) {
+			System.out.println();
+		}
 
 	}
 
@@ -79,9 +103,15 @@ public class PrincipalContaCorrente {
 
 		System.out.println("Informe um valor para depositar: ");
 		Scanner sc = new Scanner(System.in);
-		valorDeposito = Double.parseDouble(sc.nextLine());
-		conta.depositar(valorDeposito);
-		sc.close();		
+		try {
+
+			valorDeposito = Double.parseDouble(sc.nextLine());
+			conta.depositar(valorDeposito);
+
+		} catch (Exception erro) {
+			System.out.println("Deposito NÃO efetuado. Tente novamente.");
+		}
+
 
 
 	}
@@ -92,25 +122,33 @@ public class PrincipalContaCorrente {
 		conta.depositar(1500);
 		System.out.println("Seu saldo atual é " + conta.getSaldo());
 		System.out.println("Informe um valor para sacar menor que o seu saldo: ");	
-		valorSaque = Double.parseDouble(sc.nextLine());		
-		System.out.println("Valor tentado sacar: " + valorSaque);
-		if (conta.getSaldo()<=valorSaque) {
-			System.out.println("Saque NÃO realizado!");
+
+		try {
+
+			valorSaque = Double.parseDouble(sc.nextLine());		
+			System.out.println("Valor tentado sacar: " + valorSaque);
+			if (conta.getSaldo()<=valorSaque) {
+				System.out.println("Saque NÃO realizado!");
+			}
+			else if(conta.getSaldo()>valorSaque) {
+
+
+				conta.sacar(valorSaque);
+				System.out.println("Saque realizado com sucesso!");
+			}
+
+		} catch (Exception erro) {
+			System.out.println("Saque NÃO efetuado. Tente Novamente");
 		}
-		else if(conta.getSaldo()>valorSaque) {
 
 
-			conta.sacar(valorSaque);
-			System.out.println("Saque realizado com sucesso!");
-		}
 
-		sc.close();
 
 
 	}
 
 	public static void menu() {
-		System.out.println("--MENU--\n"
+		System.out.println("\n--MENU--\n"
 				+ "Digite 1 um para cadastrar um conta\n"
 				+ "Digite 2 para realizar um depósito\n"
 				+ "Digite 3 para realizar um saque\n"
