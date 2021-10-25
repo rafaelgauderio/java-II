@@ -16,9 +16,11 @@
     <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
     <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
     <fullyQualifiedTypeName name="org.junit.Test"/>
-    <fullyQualifiedTypeName name="org.junit.Assert"/>
     <fullyQualifiedTypeName name="application.StringUtil"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="jdk.nashorn.internal.runtime.ListAdapter"/>
+    <fullyQualifiedTypeName name="com.rafaeldeluca.StringUtil"/>
+    <fullyQualifiedTypeName name="org.junit.Assert"/>
+    <fullyQualifiedTypeName name="junit.framework.Assert"/>
 </qualifiedTypeNameHistroy>

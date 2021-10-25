@@ -3,6 +3,10 @@ package br.edu.aulas;
 public class Matematica {
 	
 	public int divide(int x,int y) {
+		
+	if (x==0 || y ==0) {
+		return 0;
+	}
 	
 	if (x > 999) {
 		throw new IllegalArgumentException("X deve ser menor que 1000");

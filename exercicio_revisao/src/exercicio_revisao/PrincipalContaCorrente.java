@@ -117,9 +117,7 @@ public class PrincipalContaCorrente {
 	}
 	public static void execSaque() {	
 
-		Scanner sc = new Scanner (System.in);
-		//Depositar um valor na conta para poder realziar um saque
-		conta.depositar(1500);
+		Scanner sc = new Scanner (System.in);		
 		System.out.println("Seu saldo atual é " + conta.getSaldo());
 		System.out.println("Informe um valor para sacar menor que o seu saldo: ");	
 

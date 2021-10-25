@@ -1,12 +1,11 @@
 package br.edu.aulas;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
-class MatematicaTest {
+import org.junit.Test;
+
+public class MatematicaTest {
 	
 	/*
 	Matematica matematica;
@@ -20,8 +19,14 @@ class MatematicaTest {
 	@Test
 	public void testDivide() {
 		Matematica matematica = new Matematica();
+		int divideZero = matematica.divide(0, 5);
+		int divididoPorZero=matematica.divide(10,0);
+		
+		
 		int divide = matematica.divide(50,5);
-		Assertions.assertEquals(10,divide);
+		assertEquals(10,divide);
+		assertEquals(0,divideZero);
+		assertEquals(0, divididoPorZero);
 		
 	}
 
@@ -29,7 +34,7 @@ class MatematicaTest {
 	public void testMultiplica() {
 		Matematica matematica = new Matematica();
 		int multiplica = matematica.multiplica(10,5);
-		Assertions.assertEquals(50,multiplica);
+		assertEquals(50,multiplica);
 		
 	}
 
@@ -37,7 +42,7 @@ class MatematicaTest {
 	public void testSoma() {
 		Matematica matematica = new Matematica();
 		int soma = matematica.soma(10,5);
-		Assertions.assertEquals(15,soma);
+		assertEquals(15,soma);
 		
 		
 	}
@@ -46,7 +51,7 @@ class MatematicaTest {
 	public void testSubtracao() {
 		Matematica matematica = new Matematica();
 		int subtrai = matematica.subtracao(40,5);
-		Assertions.assertEquals(35, subtrai);
+		assertEquals(35, subtrai);
 		
 	}
 	
@@ -54,7 +59,7 @@ class MatematicaTest {
 	public void testSubtracaoNegativo() {
 		Matematica matematica = new Matematica();
 		int subtrai = matematica.subtracao(-70,-20);
-		Assertions.assertEquals(-50, subtrai);
+		assertEquals(-50, subtrai);
 		
 	}
 	
@@ -62,7 +67,7 @@ class MatematicaTest {
 	public void testExponencial() {
 		Matematica matematica = new Matematica();
 		int potencia = matematica.potencia(5, 2);
-		Assertions.assertEquals(25, potencia);
+		assertEquals(25, potencia);
 	}
 
 }
