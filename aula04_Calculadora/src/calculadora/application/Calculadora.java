@@ -1,4 +1,4 @@
-package calculadora.util;
+package calculadora.application;
 
 import java.awt.BorderLayout;
 
@@ -14,11 +14,11 @@ public class Calculadora extends JFrame{
 
 	public Calculadora()  throws Exception{
 		
-		super("Calculadora");
-		
+		super("Calculadora");		
 		UIManager.setLookAndFeel(new MetalLookAndFeel());
 		setSize(380,350);
-		setLocation(300,200);
+		setLocationRelativeTo(null);
+		
 		
 		setLayout(new BorderLayout());
 		
@@ -31,11 +31,13 @@ public class Calculadora extends JFrame{
 		painelDigitos.add(BorderLayout.CENTER, new PainelNumeros(painelTexto.getTextNumber()));
 		painelDigitos.add(BorderLayout.EAST, new PainelOperacoes(painelTexto.getTextNumber()));
 		
-		add(BorderLayout.CENTER, painelDigitos);		
+		add(BorderLayout.CENTER, painelDigitos);	
 		
-		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setVisible(true);
+		
+		
 		
 		
 	}
