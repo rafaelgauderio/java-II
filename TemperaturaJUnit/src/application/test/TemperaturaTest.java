@@ -31,12 +31,12 @@ public class TemperaturaTest {
 		TemperaturaCelsius celcius6 = new TemperaturaCelsius(100);
 		
 		
-		Assert.assertNotEquals(celcius1.converteCelsiusParaFahrenheit(),-0.3999999999999986);
-		Assert.assertNotEquals(celcius2.converteCelsiusParaFahrenheit(),32.0);
-		Assert.assertNotEquals(celcius3.converteCelsiusParaFahrenheit(),48.2);
-		Assert.assertNotEquals(celcius4.converteCelsiusParaFahrenheit(),89.6);
-		Assert.assertNotEquals(celcius5.converteCelsiusParaFahrenheit(),122.0);
-		Assert.assertNotEquals(celcius6.converteCelsiusParaFahrenheit(),212.0);		
+		Assert.assertEquals(celcius1.converteCelsiusParaFahrenheit(),-0.3999999999999986,0.1);
+		Assert.assertEquals(celcius2.converteCelsiusParaFahrenheit(),32.0,0.1);
+		Assert.assertEquals(celcius3.converteCelsiusParaFahrenheit(),48.2,0.1);
+		Assert.assertEquals(celcius4.converteCelsiusParaFahrenheit(),89.6,0.1);
+		Assert.assertEquals(celcius5.converteCelsiusParaFahrenheit(),122.0,0.1);
+		Assert.assertEquals(celcius6.converteCelsiusParaFahrenheit(),212.0,0.1);		
 		
 	}
 
