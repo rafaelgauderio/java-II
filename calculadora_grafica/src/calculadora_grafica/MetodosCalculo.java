@@ -49,7 +49,7 @@ public class MetodosCalculo {
 	}
 
 	public double div() {
-
+		
 		return this.getNum1() / this.getNum2();
 	}
 	
