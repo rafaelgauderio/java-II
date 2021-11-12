@@ -2,8 +2,8 @@
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
@@ -18,14 +18,12 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import java.awt.Font;
-import javax.swing.AbstractListModel;
-import javax.swing.JTextArea;
 
 
 
@@ -37,7 +35,7 @@ public class Calculadora {
 	private int resultado =0;
 	private boolean limpar = true;
 	private String operacao = null;
-	String lista1 = "";
+	private String lista1 = "";
 	private TextArea area;
 	
 	
@@ -58,6 +56,7 @@ public class Calculadora {
 	private JButton botaoMult;
 	private JButton botaoIgual;
 	private JTextArea textArea;
+	private DefaultListModel model;
 
 
 
@@ -91,7 +90,7 @@ public class Calculadora {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 341);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout (10,10));
 
@@ -257,8 +256,39 @@ public class Calculadora {
 		botaoIgual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				calculaResultado(label.getText(),"=");
+				model.addElement(lista1);
+				
+				/*
+				lista.setModel(new AbstractListModel() {			
+					
+					String[] values = new String[] {lista1};
+					public int getSize() {
+						return values.length;
+					}
+					
+					public Object getElementAt(int index) {
+						return values[index];
+				
+					}
+				});
+				
+				*/				
+				
+				//DefaultListModel model = (DefaultListModel) lista.getModel();
+				
 			}
 		});
+		
+		/*
+		DefaultListModel<String> model = new DefaultListModel<>();
+		JList<String> list = new JList<>( model );
+
+		for (int i = 0; i < customers.length; i++ ){
+		  model.addElement( customers[i].getName() );
+		}
+		*/
+		
+		
 		painelBotoes.add(botaoIgual);
 
 		botaoMais= new JButton("+");
@@ -271,20 +301,14 @@ public class Calculadora {
 		painelBotoes.add(botaoMais);
 
 		
-		lista = new JList<String>();
-		lista.setModel(new AbstractListModel() {
-			String[] values = new String[] {lista1};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		lista = new JList<String>();		
 		
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		lista.setFont(new Font("Tw Cen MT", Font.PLAIN, 18));		
-		lista.setVisibleRowCount(20);		
+		lista.setFont(new Font("Tw Cen MT", Font.PLAIN, 14));		
+		lista.setVisibleRowCount(4);
+	
+		model = new DefaultListModel<>();
+		lista.setModel(model);
 		
 		JScrollPane scroll = new JScrollPane();
 		scroll.setViewportView(lista);
@@ -305,16 +329,20 @@ public class Calculadora {
 		lista.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
-			public void valueChanged(ListSelectionEvent e) {
+			public void valueChanged(ListSelectionEvent e) {	
 				
-				lista.add(lista1, label);
+						
 				
-				
+								
 			}
 		});
 		
 
 	}
+	
+	
+	
+	
 	
 	private String contaInicial(String operacao, int numero1, int numero2) {
 		String conta= "";
@@ -380,15 +408,14 @@ public class Calculadora {
 		this.limpar = true;
 		this.operacao = operacao;
 		
-		this.lista1=conta;
+		
 		
 		if (!conta.equals("")) {
 			System.out.println(conta);
 			
-		}	
+		}
 		
-		
-		
+		this.lista1=conta;	
 		
 	
 	}
