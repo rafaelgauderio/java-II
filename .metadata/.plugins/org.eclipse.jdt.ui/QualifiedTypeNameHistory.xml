@@ -36,7 +36,6 @@
     <fullyQualifiedTypeName name="calculadora.util.Calculadora"/>
     <fullyQualifiedTypeName name="javax.swing.UIManager"/>
     <fullyQualifiedTypeName name="javax.swing.plaf.metal.MetalLookAndFeel"/>
-    <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="calculadora.util.PainelOperacoes"/>
     <fullyQualifiedTypeName name="calculadora.util.PainelNumeros"/>
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
@@ -46,4 +45,9 @@
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="application.BubbleSort"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="javax.swing.JList"/>
+    <fullyQualifiedTypeName name="javax.swing.ListSelectionModel"/>
+    <fullyQualifiedTypeName name="javax.swing.DefaultListModel"/>
+    <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+    <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 </qualifiedTypeNameHistroy>
