@@ -1,3 +1,5 @@
+package calculadora;
+
 
 
 import java.awt.BorderLayout;
@@ -8,9 +10,8 @@ import java.awt.GridLayout;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,23 +22,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 
 
 
 public class Calculadora {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JLabel label;
 	private JList<String> lista;
 	private int resultado =0;
 	private boolean limpar = true;
 	private String operacao = null;
 	private String lista1 = "";
-	private TextArea area;
-	
+	private TextArea area;	
 	
 	private JButton botaoCE;
 	private JButton botao0;
@@ -59,7 +57,7 @@ public class Calculadora {
 	private DefaultListModel model;
 
 
-
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -81,6 +79,7 @@ public class Calculadora {
 			}
 		});
 	}
+	
 
 
 	public Calculadora() {
@@ -256,40 +255,10 @@ public class Calculadora {
 		botaoIgual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				calculaResultado(label.getText(),"=");
-				model.addElement(lista1);
-				
-				/*
-				lista.setModel(new AbstractListModel() {			
-					
-					String[] values = new String[] {lista1};
-					public int getSize() {
-						return values.length;
-					}
-					
-					public Object getElementAt(int index) {
-						return values[index];
-				
-					}
-				});
-				
-				*/				
-				
-				//DefaultListModel model = (DefaultListModel) lista.getModel();
+				model.addElement(lista1);		
 				
 			}
 		});
-		
-		/*
-		DefaultListModel<String> model = new DefaultListModel<>();
-		JList<String> list = new JList<>( model );
-		
-		String [] listaString = new  String[10];
-
-		for (int i = 0; i < listaString.length; i++ ){
-		  model.addElement( listaString[i]);
-		}
-		*/	
-		
 		
 		
 		
@@ -315,30 +284,12 @@ public class Calculadora {
 		lista.setModel(model);
 		
 		JScrollPane scroll = new JScrollPane();
-		scroll.setViewportView(lista);
+		scroll.setViewportView(lista);	
 		
-		/*
-		textArea = new JTextArea();  
-		area = new TextArea();
-		area.setSize(50,50);
-		area.setVisible(true);
-		area.append(lista1);
-		*/	
+		frame.getContentPane().add(scroll, BorderLayout.SOUTH);			
 		
-		
-		
-		frame.getContentPane().add(scroll, BorderLayout.SOUTH);		
-		
-		
-		lista.addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {				
-				
-								
-			}
-		});
-			}
+	
+}
 	
 	
 	
@@ -477,8 +428,7 @@ public class Calculadora {
 
 
 
-	}
-
+	}	
 
 
 

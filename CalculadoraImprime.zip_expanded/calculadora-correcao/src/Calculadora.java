@@ -288,8 +288,8 @@ public class Calculadora {
 		for (int i = 0; i < listaString.length; i++ ){
 		  model.addElement( listaString[i]);
 		}
-		*/	
 		
+		/*
 		
 		
 		
