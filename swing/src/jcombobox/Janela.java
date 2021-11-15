@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.Color;
+import java.awt.Font;
 
 
 public class Janela extends JFrame {
@@ -35,6 +37,7 @@ public class Janela extends JFrame {
 	
 
 	public Janela() {
+		getContentPane().setBackground(Color.YELLOW);
 
 		initWindows();
 		initComponents();
@@ -47,7 +50,7 @@ public class Janela extends JFrame {
 
 
 		labelMaterias = new JLabel("Materia: ");
-		this.add(labelMaterias);		
+		getContentPane().add(labelMaterias);		
 
 		String [] materias = {"Selecione um item...","Química", "Física", "Biologia","História","Geografia"};
 		/*
@@ -57,8 +60,11 @@ public class Janela extends JFrame {
 		this.add(comboMaterias);
 		 */
 		
-		listMaterias = new JList(materias);		
-		this.add(listMaterias);
+		listMaterias = new JList(materias);
+		listMaterias.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		listMaterias.setLayoutOrientation(JList.VERTICAL_WRAP);
+		listMaterias.setBackground(Color.GREEN);
+		getContentPane().add(listMaterias);
 		listMaterias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//selecionar apenas 1
 		//listMaterias.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);//selecionar range
 		listMaterias.addListSelectionListener(new HandlerListMaterias());
@@ -82,11 +88,11 @@ public class Janela extends JFrame {
 
 
 		labelIcone = new JLabel();
-		this.add(labelIcone);
+		getContentPane().add(labelIcone);
 
 		botaoTeste = new JButton("Imprimir");
 		botaoTeste.addActionListener(new HandLerBotaoTeste());
-		this.add(botaoTeste);		
+		getContentPane().add(botaoTeste);		
 
 	}
 
@@ -96,7 +102,7 @@ public class Janela extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Teste de JList");
 		this.setLocationRelativeTo(null); //fazer aparecer no centro
-		this.setLayout(new FlowLayout());		
+		getContentPane().setLayout(new FlowLayout());		
 
 	}
 	
