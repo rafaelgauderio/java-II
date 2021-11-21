@@ -2,7 +2,6 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
-    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="jcombobox.Janela.HandLerBotaoTeste"/>
     <fullyQualifiedTypeName name="java.awt.event.ItemListener"/>
     <fullyQualifiedTypeName name="java.awt.event.ItemEvent"/>
@@ -22,4 +21,5 @@
     <fullyQualifiedTypeName name="jlist.SingleJList"/>
     <fullyQualifiedTypeName name="model.Funcionario"/>
     <fullyQualifiedTypeName name="model.Departamento"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 </qualifiedTypeNameHistroy>
