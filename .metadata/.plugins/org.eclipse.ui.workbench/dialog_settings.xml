@@ -36,6 +36,7 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\DeLuca Tigrao\Desktop\menuCadastro.zip"/>
 			<item value="C:\Users\rafael.NTM\Desktop\CalculadoraImprime.zip"/>
 			<item value="C:\Users\rafael.NTM\Desktop\pen_drive\tesmperaturaJunit.zip"/>
 			<item value="C:\Users\DeLuca Tigrao\Desktop\testesJunit.zip"/>

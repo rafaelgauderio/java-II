@@ -36,12 +36,25 @@ public class AplicacaoBubbleSort {
 		
 		bubble2.ordenar(desordenado);		
 		bubble2.setArrayInteiros(desordenado);
-		System.out.println("\nVetor ordenado\n"+bubble2);
-		
-		
+		System.out.println("\nVetor ordenado\n"+bubble2);	
 	
 		
+		System.out.println(fatorial(10));
 		
+	}
+	
+	public static int fatorial(int numero) {
+		int resultado=1;
+		if (numero==0 ||numero==1 ) {
+			return resultado=1;
+		}
+		else {
+			for(int i=numero; i<1; i--) {
+				resultado = resultado+resultado*numero;
+			}
+		}
+		
+		return resultado;
 		
 	}
 	
