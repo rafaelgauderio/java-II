@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 import model.Departamento;
+import model.Funcionario;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -39,14 +40,26 @@ public class Principal {
 	private JButton botaoSalvar;
 	private JButton botaoCancelar;
 	private JTextField tfDepCod;
-	private JTextField tfDepNome;
-	private JPanel panelFuncionarios;
+	private JTextField tfDepNome;	
 	private JPanel panelDepCadastros;
-	private JPanel panelBotoes;
-	
+	private JPanel panelBotoes;	
 	private boolean isEditar;
-
-	private ArrayList<Departamento> listaDepartamentos;
+	private ArrayList<Departamento> listaDepartamentos;	
+	
+	private boolean isEditarFunc;
+	private JTable tableFuncionarios;	
+	private JButton botaoNovoFunc;
+	private JButton botaoEditarFunc;
+	private JButton botaoExcluirFunc;
+	private JButton botaoSalvarFunc;
+	private JButton botaoCancelarFunc;
+	private JTextField tfFuncMat;
+	private JTextField tfFuncNome;
+	private JTextField tfFuncDepartamento;
+	private JPanel panelFuncionarios;
+	private JPanel panelFuncCadastros;
+	private JPanel panelBotoesFunc;
+	private ArrayList<Funcionario> listaFuncionarios;
 
 	/**
 	 * Launch the application.
@@ -76,9 +89,13 @@ public class Principal {
 	public Principal() {
 		initialize();
 		mostraOcultaPanelDepCadastro(); // painel do meio começa não visivel até clicar no botao novo
+		mostraOcultaPanelFuncCadastro();
 
 		listaDepartamentos = new ArrayList<Departamento>();
+		listaFuncionarios = new ArrayList<Funcionario>();
+		
 		isEditar = false;
+		isEditarFunc=false;
 	}
 
 	/**
@@ -102,13 +119,13 @@ public class Principal {
 		gbl_panelDepartamentos.rowWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelDepartamentos.setLayout(gbl_panelDepartamentos);
 
-		JScrollPane scrollPane = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 0;
-		panelDepartamentos.add(scrollPane, gbc_scrollPane);
+		JScrollPane scrollPaneDep = new JScrollPane();
+		GridBagConstraints gbc_scrollPaneDep = new GridBagConstraints();
+		gbc_scrollPaneDep.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneDep.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPaneDep.gridx = 0;
+		gbc_scrollPaneDep.gridy = 0;
+		panelDepartamentos.add(scrollPaneDep, gbc_scrollPaneDep);
 
 		tableDepartamentos = new JTable();
 		tableDepartamentos.addMouseListener(new MouseAdapter() {
@@ -128,7 +145,7 @@ public class Principal {
 				}
 				));
 		tableDepartamentos.getColumnModel().getColumn(0).setMaxWidth(75);
-		scrollPane.setViewportView(tableDepartamentos);
+		scrollPaneDep.setViewportView(tableDepartamentos);
 
 		panelBotoes = new JPanel();
 		GridBagConstraints gbc_panelBotoes = new GridBagConstraints();
@@ -226,29 +243,279 @@ public class Principal {
 
 		panelFuncionarios = new JPanel();
 		tabbedPane.addTab("Funcionarios", null, panelFuncionarios, null);
+		GridBagLayout gbl_panelFuncionarios = new GridBagLayout();
+		gbl_panelFuncionarios.columnWidths = new int[] {100, 0};
+		gbl_panelFuncionarios.rowHeights = new int[] {100, 0, 85};
+		gbl_panelFuncionarios.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panelFuncionarios.rowWeights = new double[]{0.0, 0.0, 1.0};
+		panelFuncionarios.setLayout(gbl_panelFuncionarios);		
+		
+		JScrollPane scrollPaneFunc = new JScrollPane();
+		GridBagConstraints gbc_scrollPaneFunc = new GridBagConstraints();
+		gbc_scrollPaneFunc.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneFunc.insets = new Insets(0, 0, 5, 0);		
+		gbc_scrollPaneFunc.gridx = 0;
+		gbc_scrollPaneFunc.gridy = 0;
+		panelFuncionarios.add(scrollPaneFunc, gbc_scrollPaneFunc);		
+		
+		
+	
+		
+		tableFuncionarios = new JTable();
+		tableFuncionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				selectionaLinhaTabelaFuncionarios();
+
+			}
+		});
+		tableFuncionarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableFuncionarios.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Matr\u00EDcula", "Nome", "Departamento"
+			}
+		));
+		tableFuncionarios.getColumnModel().getColumn(0).setMaxWidth(95);
+		scrollPaneFunc.setViewportView(tableFuncionarios);
+		
+		panelBotoesFunc = new JPanel();
+		GridBagConstraints gbc_panelBotoesFunc = new GridBagConstraints();
+		gbc_panelBotoesFunc.insets = new Insets(0, 0, 5, 0);
+		gbc_panelBotoesFunc.fill = GridBagConstraints.BOTH;
+		gbc_panelBotoesFunc.gridx = 0;
+		gbc_panelBotoesFunc.gridy = 1;
+		panelFuncionarios.add(panelBotoesFunc, gbc_panelBotoesFunc);
+
+		botaoNovoFunc = new JButton("Novo");
+		botaoNovoFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				mostraOcultaPanelFuncCadastro();
+			}
+		});
+		panelBotoesFunc.add(botaoNovoFunc);
+
+		botaoEditarFunc = new JButton("Editar");
+		botaoEditarFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				isEditarFunc = true; 
+				mostraOcultaPanelFuncCadastro();
+			}
+		});
+
+		panelBotoesFunc.add(botaoEditarFunc);
+
+		botaoExcluirFunc = new JButton("excluir");
+		botaoExcluirFunc.addActionListener (new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tableFuncionarios.getSelectedRow()> -1) {
+					 ((DefaultTableModel) tableFuncionarios.getModel()).removeRow(tableFuncionarios.getSelectedRow());
+					botaoEditarFunc.setEnabled(false);
+					botaoExcluirFunc.setEnabled(false);
+				}
+				
+			}
+		});
+		panelBotoesFunc.add(botaoExcluirFunc);		
+		
+
+		panelFuncCadastros = new JPanel();
+		panelFuncCadastros.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Dados Funcionários", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelFuncCadastros.setLayout(null);
+		GridBagConstraints gbc_panelFuncCadastros = new GridBagConstraints();
+		gbc_panelFuncCadastros.fill = GridBagConstraints.BOTH;
+		gbc_panelFuncCadastros.gridx = 0;
+		gbc_panelFuncCadastros.gridy = 2;
+		panelFuncionarios.add(panelFuncCadastros, gbc_panelFuncCadastros);
+
+		JLabel lblNewLabel_2 = new JLabel("Matr\u00EDcula:");
+		lblNewLabel_2.setBounds(25, 23, 67, 14);
+		panelFuncCadastros.add(lblNewLabel_2);
+
+		JLabel lblNewLabel_3 = new JLabel("Nome:");
+		lblNewLabel_3.setBounds(25, 55, 49, 14);
+		panelFuncCadastros.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Departamento:");
+		lblNewLabel_4.setBounds(25, 92, 87, 14);
+		panelFuncCadastros.add(lblNewLabel_4);
+
+
+		tfFuncMat = new JTextField();
+		tfFuncMat.setBounds(122, 20, 96, 20);
+		panelFuncCadastros.add(tfFuncMat);
+		tfFuncMat.setColumns(10);
+
+		tfFuncNome = new JTextField();
+		tfFuncNome.setBounds(122, 52, 222, 20);
+		panelFuncCadastros.add(tfFuncNome);
+		tfFuncNome.setColumns(10);
+		
+		tfFuncDepartamento = new JTextField();
+		tfFuncDepartamento.setBounds(122, 89, 222, 20);
+		panelFuncCadastros.add(tfFuncDepartamento);
+		tfFuncDepartamento.setColumns(10);
+
+		botaoSalvarFunc = new JButton("Salvar");
+		botaoSalvarFunc.setFont(new Font("Tahoma", Font.BOLD, 11));
+		botaoSalvarFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				alimentaListaFuncionario();
+				alimentaTabelaFuncionario();				
+				mostraOcultaPanelFuncCadastro();
+				isEditarFunc=false;
+
+			}
+		});
+		botaoSalvarFunc.setBounds(122, 115, 107, 35);
+		panelFuncCadastros.add(botaoSalvarFunc);
+
+		botaoCancelarFunc = new JButton("Cancelar");
+		botaoCancelarFunc.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		botaoCancelarFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				mostraOcultaPanelFuncCadastro();
+				isEditarFunc=false;
+
+			}
+		});		
+		botaoCancelarFunc.setBounds(239, 115, 105, 35);
+		panelFuncCadastros.add(botaoCancelarFunc);	
+		
+		
 	}
+	
+	
+
+	private void mostraOcultaPanelFuncCadastro() {
+
+		panelFuncCadastros.setVisible(!panelFuncCadastros.isVisible()); 	
+		botaoNovoFunc.setEnabled(!panelFuncCadastros.isVisible()); 
+
+		botaoEditarFunc.setEnabled(false); 
+		botaoExcluirFunc.setEnabled(false);
+		
+		
+		if(!isEditarFunc==true) {
+			tfFuncMat.setText("");
+			tfFuncNome.setText("");	
+			tfFuncDepartamento.setText("");
+			botaoSalvarFunc.setText("SALVAR");  
+		} else {
+			
+			int linha = tableFuncionarios.getSelectedRow();
+			Funcionario func = listaFuncionarios.get(linha);
+			tfDepCod.setText(func.getMatricula()+"");
+			tfDepNome.setText(func.getNome());
+			tfFuncDepartamento.setText(func.getDepartamento()+"");
+			botaoSalvarFunc.setText("ATUALIZAR"); 
+		}	
+		
+		
+	}
+
+	private void alimentaListaFuncionario() {
+
+	
+		if(isEditarFunc==true) {
+			updateFuncionario();
+		} else {
+			salvaFuncionario();
+		}
+		
+	}
+	
+	private void salvaFuncionario() {
+		int matricula = Integer.parseInt(tfFuncMat.getText());
+		String nome = tfFuncNome.getText();		
+		Departamento dep = new Departamento();
+		Funcionario func = new Funcionario(matricula, nome,dep);
+		listaFuncionarios.add(func);		
+	}
+	
+	private void updateFuncionario() {
+		int matricula = Integer.parseInt(tfFuncMat.getText());
+		String nome = tfFuncNome.getText();
+		Departamento dep = new Departamento();
+		Funcionario func = new Funcionario(matricula, nome,dep);
+		int linha = tableFuncionarios.getSelectedRow(); 
+		listaFuncionarios.set(linha, func);
+		
+		
+	}
+
+	private void alimentaTabelaFuncionario() {
+
+		if(listaFuncionarios.isEmpty()) {
+			return;	
+		}
+		
+		else {
+			int linha = listaFuncionarios.size() - 1 ; 
+			if (isEditarFunc==true) {
+				linha = tableFuncionarios.getSelectedRow();
+			}
+
+			DefaultTableModel tableModel = (DefaultTableModel)tableFuncionarios.getModel();
+
+			Object[] arrayObj = {listaFuncionarios.get(linha).getMatricula(), 
+					listaFuncionarios.get(linha).getNome(),listaFuncionarios.get(linha).getDepartamento()}; 
+			if (isEditarFunc==true) {
+				tableModel.setValueAt(arrayObj[0], linha, 0); 
+				tableModel.setValueAt(arrayObj[1],linha, 1);
+				tableModel.setValueAt(arrayObj[2], linha,2); 
+				
+			} else {
+				tableModel.addRow(arrayObj);		
+
+			}
+
+			
+		}
+
+	}
+	
+	private void selectionaLinhaTabelaFuncionarios() {
+		
+		
+		if(tableFuncionarios.getSelectedRow() > -1) { 
+			botaoEditarFunc.setEnabled(true);
+			botaoExcluirFunc.setEnabled(true);
+					
+		} else {
+			botaoEditarFunc.setEnabled(false);
+			botaoExcluirFunc.setEnabled(false);
+			
+		}
+
+	}
+	
 
 	private void mostraOcultaPanelDepCadastro() {
 
-		panelDepCadastros.setVisible(!panelDepCadastros.isVisible()); //deixar visible se estiver invisível		
-		botaoNovo.setEnabled(!panelDepCadastros.isVisible()); // habilitar se estiver inabilitado
+		panelDepCadastros.setVisible(!panelDepCadastros.isVisible()); 	
+		botaoNovo.setEnabled(!panelDepCadastros.isVisible()); 
 
-		botaoEditar.setEnabled(false); // só habilitar na hora que selecionar uma linha
-		botaoExcluir.setEnabled(false);// só habilitar na hora que selecionar uma linha
+		botaoEditar.setEnabled(false); 
+		botaoExcluir.setEnabled(false);
 		
-		//só habilitar para editar se uma linha estiver selecionada, e puxa os dados da linha que delecionou.
+		
 		if(!isEditar==true) {
 			tfDepCod.setText("");
 			tfDepNome.setText("");
-			botaoSalvar.setText("SALVAR"); //se não vem do editar os campos estavao em branco e label - salvar 
+			botaoSalvar.setText("SALVAR");  
 		} else {
-			//encontar a linha, puxar ela do arraylista e setar os novos codigos e nome
-			int linha = tableDepartamentos.getSelectedRow();
+			
+			int linha = tableFuncionarios.getSelectedRow();
 			Departamento dep = listaDepartamentos.get(linha);
 			tfDepCod.setText(dep.getCodigo()+"");
 			tfDepNome.setText(dep.getNome());
-			botaoSalvar.setText("ATUALIZAR"); //se puxao os dados e está dando um update
-		}	
+			botaoSalvar.setText("ATUALIZAR"); 
+		}
 		
 		
 	}
@@ -326,7 +593,6 @@ public class Principal {
 		}
 
 	}
-
 }
 
 

@@ -11,15 +11,13 @@ public class Funcionario {
 	}	
 
 
-	public Funcionario(int matricula, String nome) {
-		super();
+	public Funcionario(int matricula, String nome) {	
 		this.matricula = matricula;
 		this.nome = nome;
 	}
 
 
-	public Funcionario(int matricula, String nome, Departamento departamento) {
-		super();
+	public Funcionario(int matricula, String nome, Departamento departamento) {		
 		this.matricula = matricula;
 		this.nome = nome;
 		this.departamento = departamento;
