@@ -31,6 +31,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 
 public class Principal {
 
@@ -62,6 +63,10 @@ public class Principal {
 	private JPanel panelBotoesFunc;
 	private ArrayList<Funcionario> listaFuncionarios;
 	private JComboBox<Object> cbFuncDep;
+	private JLabel labelNome;
+	private JFormattedTextField ftfDataNascimento;
+	private JFormattedTextField ftfCPF;
+	private JFormattedTextField ftfCelular;
 
 	/**	 * Launch the application.
 	 */
@@ -105,7 +110,7 @@ public class Principal {
 	private void initialize() {
 		frmTelaCadastro = new JFrame();
 		frmTelaCadastro.setTitle("Tela Cadastro");
-		frmTelaCadastro.setBounds(100, 100, 537, 450);
+		frmTelaCadastro.setBounds(100, 100, 537, 452);
 		frmTelaCadastro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -197,13 +202,9 @@ public class Principal {
 		gbc_panelDepCadastros.gridy = 2;
 		panelDepartamentos.add(panelDepCadastros, gbc_panelDepCadastros);
 
-		JLabel lblNewLabel = new JLabel("C\u00F3d. Dep:");
-		lblNewLabel.setBounds(25, 23, 67, 14);
-		panelDepCadastros.add(lblNewLabel);
-
-		JLabel lblNewLabel_1 = new JLabel("Nome:");
-		lblNewLabel_1.setBounds(25, 55, 49, 14);
-		panelDepCadastros.add(lblNewLabel_1);
+		JLabel lblCodigo = new JLabel("C\u00F3d. Dep:");
+		lblCodigo.setBounds(25, 23, 67, 14);
+		panelDepCadastros.add(lblCodigo);
 
 		tfDepCod = new JTextField();
 		tfDepCod.setBounds(122, 20, 96, 20);
@@ -226,7 +227,7 @@ public class Principal {
 
 			}
 		});
-		botaoSalvar.setBounds(122, 83, 107, 35);
+		botaoSalvar.setBounds(122, 96, 107, 35);
 		panelDepCadastros.add(botaoSalvar);
 
 		botaoCancelar = new JButton("Cancelar");
@@ -239,14 +240,18 @@ public class Principal {
 
 			}
 		});		
-		botaoCancelar.setBounds(239, 83, 105, 35);
+		botaoCancelar.setBounds(239, 96, 105, 35);
 		panelDepCadastros.add(botaoCancelar);
+		
+		labelNome = new JLabel("Nome:");
+		labelNome.setBounds(25, 55, 49, 14);
+		panelDepCadastros.add(labelNome);
 
 		panelFuncionarios = new JPanel();
 		tabbedPane.addTab("Funcionarios", null, panelFuncionarios, null);
 		GridBagLayout gbl_panelFuncionarios = new GridBagLayout();
 		gbl_panelFuncionarios.columnWidths = new int[] {100, 0};
-		gbl_panelFuncionarios.rowHeights = new int[] {100, 0, 85};
+		gbl_panelFuncionarios.rowHeights = new int[] {80, 0, 130};
 		gbl_panelFuncionarios.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gbl_panelFuncionarios.rowWeights = new double[]{0.0, 0.0, 1.0};
 		panelFuncionarios.setLayout(gbl_panelFuncionarios);		
@@ -273,13 +278,22 @@ public class Principal {
 		});
 		tableFuncionarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableFuncionarios.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-						"Matr\u00EDcula", "Nome", "Departamento"
-				}
-				));
+			new Object[][] {
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"Matr\u00EDcula", "Nome", "CPF", "Celular", "Data de Dascimento", "Departamento"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Object.class, Object.class, String.class, Object.class, Object.class, Object.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
 		tableFuncionarios.getColumnModel().getColumn(0).setMaxWidth(95);
+		tableFuncionarios.getColumnModel().getColumn(4).setPreferredWidth(122);
 		scrollPaneFunc.setViewportView(tableFuncionarios);
 
 		panelBotoesFunc = new JPanel();
@@ -342,12 +356,12 @@ public class Principal {
 
 
 		tfFuncMat = new JTextField();
-		tfFuncMat.setBounds(122, 20, 96, 20);
+		tfFuncMat.setBounds(102, 20, 96, 20);
 		panelFuncCadastros.add(tfFuncMat);
 		tfFuncMat.setColumns(10);
 
 		tfFuncNome = new JTextField();
-		tfFuncNome.setBounds(122, 52, 222, 20);
+		tfFuncNome.setBounds(102, 52, 222, 20);
 		panelFuncCadastros.add(tfFuncNome);
 		tfFuncNome.setColumns(10);
 
@@ -362,7 +376,7 @@ public class Principal {
 
 			}
 		});
-		botaoSalvarFunc.setBounds(122, 141, 107, 35);
+		botaoSalvarFunc.setBounds(111, 202, 107, 35);
 		panelFuncCadastros.add(botaoSalvarFunc);
 
 		botaoCancelarFunc = new JButton("Cancelar");
@@ -375,16 +389,56 @@ public class Principal {
 
 			}
 		});		
-		botaoCancelarFunc.setBounds(239, 141, 105, 35);
+		botaoCancelarFunc.setBounds(228, 202, 105, 35);
 		panelFuncCadastros.add(botaoCancelarFunc);	
 
 		JLabel label = new JLabel("Departamento:");
-		label.setBounds(25, 98, 87, 14);
+		label.setBounds(318, 131, 87, 14);
 		panelFuncCadastros.add(label);
 
 		cbFuncDep = new JComboBox();
-		cbFuncDep.setBounds(122, 94, 222, 22);
+		cbFuncDep.setBounds(315, 156, 178, 22);
 		panelFuncCadastros.add(cbFuncDep);
+		
+		JLabel lblCPF = new JLabel("CPF:");
+		lblCPF.setBounds(25, 80, 48, 20);
+		panelFuncCadastros.add(lblCPF);
+		
+		JLabel lblCelular = new JLabel("Celular:");
+		lblCelular.setBounds(25, 122, 48, 14);
+		panelFuncCadastros.add(lblCelular);
+		
+		JLabel lblDatanascimento = new JLabel("Data de Nascimento:");
+		lblDatanascimento.setBounds(25, 160, 107, 14);
+		panelFuncCadastros.add(lblDatanascimento);
+		
+		ftfCPF = new JFormattedTextField();
+		ftfCPF.setBounds(102, 83, 120, 20);
+		try {
+			ftfCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+		} catch  (java.text.ParseException e1){
+			e1.printStackTrace();
+		}
+		
+		panelFuncCadastros.add(ftfCPF);
+		
+		ftfCelular = new JFormattedTextField();
+		ftfCelular.setBounds(101, 119, 121, 20);
+		try {
+			ftfCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+		} catch  (java.text.ParseException e1){
+			e1.printStackTrace();
+		}
+		panelFuncCadastros.add(ftfCelular);
+		
+		ftfDataNascimento = new JFormattedTextField();
+		ftfDataNascimento.setBounds(142, 157, 139, 20);
+		try {
+			ftfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+		} catch  (java.text.ParseException e1){
+			e1.printStackTrace();
+		}
+		panelFuncCadastros.add(ftfDataNascimento);
 
 
 	}
@@ -534,10 +588,13 @@ public class Principal {
 		if(!isEditar==true) {
 			tfDepCod.setText("");
 			tfDepNome.setText("");
+			ftfCPF.setText("000.000.000-00");
+			ftfCelular.setText("(00)00000-00");
+			ftfDataNascimento.setText("01/01/2001");
 			botaoSalvar.setText("SALVAR");  
 		} else {
 
-			int linha = tableFuncionarios.getSelectedRow();
+			int linha = tableDepartamentos.getSelectedRow();
 			Departamento dep = listaDepartamentos.get(linha);
 			tfDepCod.setText(dep.getCodigo()+"");
 			tfDepNome.setText(dep.getNome());
@@ -621,8 +678,6 @@ public class Principal {
 		}
 
 	}	
-
-
 }
 
 
