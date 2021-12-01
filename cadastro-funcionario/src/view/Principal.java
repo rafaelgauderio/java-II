@@ -25,10 +25,15 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -43,14 +48,14 @@ public class Principal {
 	private JButton botaoSalvar;
 	private JButton botaoCancelar;
 	private JTextField tfDepCod;
-	private JTextField tfDepNome;	
+	private JTextField tfDepNome;
 	private JPanel panelDepCadastros;
-	private JPanel panelBotoes;	
+	private JPanel panelBotoes;
 	private boolean isEditar;
-	private ArrayList<Departamento> listaDepartamentos;	
+	private ArrayList<Departamento> listaDepartamentos;
 
 	private boolean isEditarFunc;
-	private JTable tableFuncionarios;	
+	private JTable tableFuncionarios;
 	private JButton botaoNovoFunc;
 	private JButton botaoEditarFunc;
 	private JButton botaoExcluirFunc;
@@ -67,15 +72,20 @@ public class Principal {
 	private JFormattedTextField ftfDataNascimento;
 	private JFormattedTextField ftfCPF;
 	private JFormattedTextField ftfCelular;
+	private String cpfSemMascara;
+	private String celularSemMascara;
+	
 
-	/**	 * Launch the application.
+	/**
+	 * * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					for(javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-						if("Metal".equals(info.getName())) {
+					for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
+							.getInstalledLookAndFeels()) {
+						if ("Metal".equals(info.getName())) {
 							javax.swing.UIManager.setLookAndFeel(info.getClassName());
 							break;
 						}
@@ -101,7 +111,7 @@ public class Principal {
 		listaFuncionarios = new ArrayList<Funcionario>();
 
 		isEditar = false;
-		isEditarFunc=false;
+		isEditarFunc = false;
 	}
 
 	/**
@@ -119,10 +129,10 @@ public class Principal {
 		JPanel panelDepartamentos = new JPanel();
 		tabbedPane.addTab("Departamentos", null, panelDepartamentos, null);
 		GridBagLayout gbl_panelDepartamentos = new GridBagLayout();
-		gbl_panelDepartamentos.columnWidths = new int[]{0, 0};
-		gbl_panelDepartamentos.rowHeights = new int[] {0, 0, 100, 0};
-		gbl_panelDepartamentos.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panelDepartamentos.rowWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelDepartamentos.columnWidths = new int[] { 0, 0 };
+		gbl_panelDepartamentos.rowHeights = new int[] { 0, 0, 100, 0 };
+		gbl_panelDepartamentos.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panelDepartamentos.rowWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		panelDepartamentos.setLayout(gbl_panelDepartamentos);
 
 		JScrollPane scrollPaneDep = new JScrollPane();
@@ -143,13 +153,8 @@ public class Principal {
 			}
 		});
 		tableDepartamentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableDepartamentos.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-						"C\u00F3d. Dep.", "Nome"
-				}
-				));
+		tableDepartamentos
+				.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "C\u00F3d. Dep.", "Nome" }));
 		tableDepartamentos.getColumnModel().getColumn(0).setMaxWidth(75);
 		scrollPaneDep.setViewportView(tableDepartamentos);
 
@@ -173,7 +178,8 @@ public class Principal {
 		botaoEditar = new JButton("Editar");
 		botaoEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				isEditar = true; //só puxa os dados de edição se flag estiver true, se vier pelo botao novo, fica em branco
+				isEditar = true; // só puxa os dados de edição se flag estiver true, se vier pelo botao novo,
+									// fica em branco
 				mostraOcultaPanelDepCadastro();
 			}
 		});
@@ -181,9 +187,9 @@ public class Principal {
 		panelBotoes.add(botaoEditar);
 
 		botaoExcluir = new JButton("excluir");
-		botaoExcluir.addActionListener (new ActionListener() {
+		botaoExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (tableDepartamentos.getSelectedRow()> -1) {
+				if (tableDepartamentos.getSelectedRow() > -1) {
 					((DefaultTableModel) tableDepartamentos.getModel()).removeRow(tableDepartamentos.getSelectedRow());
 					botaoEditar.setEnabled(false);
 					botaoExcluir.setEnabled(false);
@@ -194,7 +200,8 @@ public class Principal {
 		panelBotoes.add(botaoExcluir);
 
 		panelDepCadastros = new JPanel();
-		panelDepCadastros.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Dados Departamento", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelDepCadastros.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Dados Departamento",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelDepCadastros.setLayout(null);
 		GridBagConstraints gbc_panelDepCadastros = new GridBagConstraints();
 		gbc_panelDepCadastros.fill = GridBagConstraints.BOTH;
@@ -221,9 +228,9 @@ public class Principal {
 		botaoSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				alimentaListaDepartamento();
-				alimentaTabelaDepartamento();				
+				alimentaTabelaDepartamento();
 				mostraOcultaPanelDepCadastro();
-				isEditar=false;
+				isEditar = false;
 
 			}
 		});
@@ -236,13 +243,13 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 
 				mostraOcultaPanelDepCadastro();
-				isEditar=false;
+				isEditar = false;
 
 			}
-		});		
+		});
 		botaoCancelar.setBounds(239, 96, 105, 35);
 		panelDepCadastros.add(botaoCancelar);
-		
+
 		labelNome = new JLabel("Nome:");
 		labelNome.setBounds(25, 55, 49, 14);
 		panelDepCadastros.add(labelNome);
@@ -250,22 +257,19 @@ public class Principal {
 		panelFuncionarios = new JPanel();
 		tabbedPane.addTab("Funcionarios", null, panelFuncionarios, null);
 		GridBagLayout gbl_panelFuncionarios = new GridBagLayout();
-		gbl_panelFuncionarios.columnWidths = new int[] {100, 0};
-		gbl_panelFuncionarios.rowHeights = new int[] {80, 0, 130};
-		gbl_panelFuncionarios.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panelFuncionarios.rowWeights = new double[]{0.0, 0.0, 1.0};
-		panelFuncionarios.setLayout(gbl_panelFuncionarios);		
+		gbl_panelFuncionarios.columnWidths = new int[] { 100, 0 };
+		gbl_panelFuncionarios.rowHeights = new int[] { 80, 0, 130 };
+		gbl_panelFuncionarios.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panelFuncionarios.rowWeights = new double[] { 0.0, 0.0, 1.0 };
+		panelFuncionarios.setLayout(gbl_panelFuncionarios);
 
 		JScrollPane scrollPaneFunc = new JScrollPane();
 		GridBagConstraints gbc_scrollPaneFunc = new GridBagConstraints();
 		gbc_scrollPaneFunc.fill = GridBagConstraints.BOTH;
-		gbc_scrollPaneFunc.insets = new Insets(0, 0, 5, 0);		
+		gbc_scrollPaneFunc.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPaneFunc.gridx = 0;
 		gbc_scrollPaneFunc.gridy = 0;
-		panelFuncionarios.add(scrollPaneFunc, gbc_scrollPaneFunc);		
-
-
-
+		panelFuncionarios.add(scrollPaneFunc, gbc_scrollPaneFunc);
 
 		tableFuncionarios = new JTable();
 		tableFuncionarios.addMouseListener(new MouseAdapter() {
@@ -277,17 +281,11 @@ public class Principal {
 			}
 		});
 		tableFuncionarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableFuncionarios.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"Matr\u00EDcula", "Nome", "CPF", "Celular", "Data de Dascimento", "Departamento"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Object.class, Object.class, String.class, Object.class, Object.class, Object.class
-			};
+		tableFuncionarios.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "Matr\u00EDcula", "Nome", "CPF", "Celular", "Data de Dascimento", "Departamento" }) {
+			Class[] columnTypes = new Class[] { Object.class, Object.class, String.class, Object.class, String.class,
+					Object.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
@@ -316,7 +314,7 @@ public class Principal {
 		botaoEditarFunc = new JButton("Editar");
 		botaoEditarFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				isEditarFunc = true; 
+				isEditarFunc = true;
 				mostraOcultaPanelFuncCadastro();
 			}
 		});
@@ -324,9 +322,9 @@ public class Principal {
 		panelBotoesFunc.add(botaoEditarFunc);
 
 		botaoExcluirFunc = new JButton("excluir");
-		botaoExcluirFunc.addActionListener (new ActionListener() {
+		botaoExcluirFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (tableFuncionarios.getSelectedRow()> -1) {
+				if (tableFuncionarios.getSelectedRow() > -1) {
 					((DefaultTableModel) tableFuncionarios.getModel()).removeRow(tableFuncionarios.getSelectedRow());
 					botaoEditarFunc.setEnabled(false);
 					botaoExcluirFunc.setEnabled(false);
@@ -334,11 +332,11 @@ public class Principal {
 
 			}
 		});
-		panelBotoesFunc.add(botaoExcluirFunc);		
-
+		panelBotoesFunc.add(botaoExcluirFunc);
 
 		panelFuncCadastros = new JPanel();
-		panelFuncCadastros.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Dados Funcionários", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelFuncCadastros.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Dados Funcionários",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelFuncCadastros.setLayout(null);
 		GridBagConstraints gbc_panelFuncCadastros = new GridBagConstraints();
 		gbc_panelFuncCadastros.fill = GridBagConstraints.BOTH;
@@ -353,7 +351,6 @@ public class Principal {
 		JLabel lblNewLabel_3 = new JLabel("Nome:");
 		lblNewLabel_3.setBounds(25, 55, 49, 14);
 		panelFuncCadastros.add(lblNewLabel_3);
-
 
 		tfFuncMat = new JTextField();
 		tfFuncMat.setBounds(102, 20, 96, 20);
@@ -370,9 +367,9 @@ public class Principal {
 		botaoSalvarFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				alimentaListaFuncionario();
-				alimentaTabelaFuncionario();				
+				alimentaTabelaFuncionario();
 				mostraOcultaPanelFuncCadastro();
-				isEditarFunc=false;
+				isEditarFunc = false;
 
 			}
 		});
@@ -385,12 +382,12 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 
 				mostraOcultaPanelFuncCadastro();
-				isEditarFunc=false;
+				isEditarFunc = false;
 
 			}
-		});		
+		});
 		botaoCancelarFunc.setBounds(228, 202, 105, 35);
-		panelFuncCadastros.add(botaoCancelarFunc);	
+		panelFuncCadastros.add(botaoCancelarFunc);
 
 		JLabel label = new JLabel("Departamento:");
 		label.setBounds(318, 131, 87, 14);
@@ -399,151 +396,228 @@ public class Principal {
 		cbFuncDep = new JComboBox();
 		cbFuncDep.setBounds(315, 156, 178, 22);
 		panelFuncCadastros.add(cbFuncDep);
-		
+
 		JLabel lblCPF = new JLabel("CPF:");
 		lblCPF.setBounds(25, 80, 48, 20);
 		panelFuncCadastros.add(lblCPF);
-		
+
 		JLabel lblCelular = new JLabel("Celular:");
 		lblCelular.setBounds(25, 122, 48, 14);
 		panelFuncCadastros.add(lblCelular);
-		
+
 		JLabel lblDatanascimento = new JLabel("Data de Nascimento:");
 		lblDatanascimento.setBounds(25, 160, 107, 14);
 		panelFuncCadastros.add(lblDatanascimento);
-		
+
 		ftfCPF = new JFormattedTextField();
 		ftfCPF.setBounds(102, 83, 120, 20);
 		try {
-			ftfCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-		} catch  (java.text.ParseException e1){
+			ftfCPF.setFormatterFactory(
+					new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		panelFuncCadastros.add(ftfCPF);
-		
+
 		ftfCelular = new JFormattedTextField();
 		ftfCelular.setBounds(101, 119, 121, 20);
 		try {
-			ftfCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
-		} catch  (java.text.ParseException e1){
+			ftfCelular.setFormatterFactory(
+					new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
 		panelFuncCadastros.add(ftfCelular);
-		
+
 		ftfDataNascimento = new JFormattedTextField();
 		ftfDataNascimento.setBounds(142, 157, 139, 20);
 		try {
-			ftfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-		} catch  (java.text.ParseException e1){
+			ftfDataNascimento.setFormatterFactory(
+					new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
 		panelFuncCadastros.add(ftfDataNascimento);
 
-
 	}
-
-
 
 	private void mostraOcultaPanelFuncCadastro() {
 
-		panelFuncCadastros.setVisible(!panelFuncCadastros.isVisible()); 	
-		botaoNovoFunc.setEnabled(!panelFuncCadastros.isVisible()); 
+		panelFuncCadastros.setVisible(!panelFuncCadastros.isVisible());
+		botaoNovoFunc.setEnabled(!panelFuncCadastros.isVisible());
 
-		botaoEditarFunc.setEnabled(false); 
+		botaoEditarFunc.setEnabled(false);
 		botaoExcluirFunc.setEnabled(false);
 
-
-		if(!isEditarFunc==true) {
+		if (!isEditarFunc == true) {
 			tfFuncMat.setText("");
-			tfFuncNome.setText("");			
-			botaoSalvarFunc.setText("SALVAR");  
+			tfFuncNome.setText("");
+			ftfCPF.setText("");
+			ftfCelular.setText("");
+			ftfDataNascimento.setText("");
+			botaoSalvarFunc.setText("SALVAR");
 		} else {
 
 			int linha = tableFuncionarios.getSelectedRow();
 			Funcionario func = listaFuncionarios.get(linha);
-			tfFuncMat.setText(func.getMatricula()+"");
-			tfFuncNome.setText(func.getNome());			
-			botaoSalvarFunc.setText("ATUALIZAR"); 
-		}	
-
+			tfFuncMat.setText(func.getMatricula() + "");
+			tfFuncNome.setText(func.getNome());
+			ftfCelular.setText(func.getCelular());
+			ftfCPF.setText(func.getCPF());
+			ftfDataNascimento.setText(func.getDataNascimento()+"");
+			botaoSalvarFunc.setText("ATUALIZAR");
+		}
 
 	}
 
 	private void alimentaListaFuncionario() {
 
-
-		if(isEditarFunc==true) {
+		if (isEditarFunc == true) {
 			updateFuncionario();
 		} else {
-			salvaFuncionario();
+			try {
+				salvaFuncionario();
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
+			}
 		}
 
 	}
+	
+	private void retiraMascaraCPF() {
+		
+		cpfSemMascara=(ftfCPF.getText().replace(".","").replace("-",""));
+				
+		
+	}
+	
+	private void retiraMascaraCelular() {
+		
+		
+		celularSemMascara=(ftfCelular.getText().replace("-","").replace(")","").replace("(",""));		
+		
+		
+	}
 
-	private void salvaFuncionario() {
+	private void salvaFuncionario() throws ParseException {
+		
 		int indice = cbFuncDep.getSelectedIndex();
 		
-		if(indice==0) {
-			JOptionPane.showMessageDialog(null,"Tu deves selecionar um departamento!".toUpperCase());			
-		}else {
-					
-			int matricula = Integer.parseInt(tfFuncMat.getText());
-			String nome = tfFuncNome.getText();
-			Funcionario func = new Funcionario(matricula,nome,null);
-			func.setDepartamento(listaDepartamentos.get(indice-1));
-			listaDepartamentos.get(indice-1).adicionaFuncionario(func);
-			listaFuncionarios.add(func);			
+		retiraMascaraCelular();
+		retiraMascaraCPF();
+				
+
+		if (indice==0 ) {
+			JOptionPane.showMessageDialog(null, "Tu deves selecionar um departamento!".toUpperCase());
+			
+		}		
+	
+		
+
+		else if (cpfSemMascara.length() != 11 ||cpfSemMascara.isEmpty() || cpfSemMascara.isBlank()) {
+			
+			JOptionPane.showMessageDialog(null, "CPF deve conter 11 digitos");
+			
 		}
 		
-		
+		else if (celularSemMascara.length()!= 11 || celularSemMascara.isEmpty() || celularSemMascara.isBlank()) {
 			
+			JOptionPane.showMessageDialog(null, "O número de celular deve conter 11 digitos");
+			
+		}
+		
+		else if(ftfDataNascimento.getText().isEmpty() || ftfDataNascimento.getText().isBlank()) {
+			
+			JOptionPane.showMessageDialog(null, "Preencha o campo data de nascimento");
+		}
+
+
+		else { //(indice!=0 && cpfSemMascara.length()==11 && celularSemMascara.length()==11)
+			
+			int matricula = Integer.parseInt(tfFuncMat.getText());
+			String nome = tfFuncNome.getText();
+			String cpf = ftfCPF.getText();
+			String celular = ftfCelular.getText();
+
+			SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+			String dataNascimento = ftfDataNascimento.getText();
+			Calendar dataNascimentoCalendar = Calendar.getInstance();
+			try {
+				dataNascimentoCalendar.setTime(dataFormatada.parse(dataNascimento));
+			} catch (ParseException e) {
+
+				e.printStackTrace();
+			}
+			Funcionario func = new Funcionario(matricula, nome, null, cpf, celular, dataNascimentoCalendar);
+			func.setDepartamento(listaDepartamentos.get(indice - 1));
+			listaDepartamentos.get(indice - 1).adicionaFuncionario(func);
+			listaFuncionarios.add(func);
+			
+		}
+		
+
 	}
 
 	private void updateFuncionario() {
-		
-		int indice = cbFuncDep.getSelectedIndex();	
-		
-		if(indice==0) {
-			JOptionPane.showMessageDialog(null,"Tu deves selecionar um departamento!".toUpperCase());			
-		}else {
-			int matricula = Integer.parseInt(tfFuncMat.getText());
-			String nome = tfFuncNome.getText();				
-			Funcionario func = new Funcionario(matricula,nome,null);
-			func.setDepartamento(listaDepartamentos.get(indice-1));		
-			int linha = tableFuncionarios.getSelectedRow(); 
-			listaFuncionarios.set(linha, func);
-		}		
 
+		int indice = cbFuncDep.getSelectedIndex();
+
+		if (indice == 0) {
+			JOptionPane.showMessageDialog(null, "Tu deves selecionar um departamento!".toUpperCase());
+		} else {
+			int matricula = Integer.parseInt(tfFuncMat.getText());
+			String nome = tfFuncNome.getText();
+			String cpf = ftfCPF.getText();
+			String celular = ftfCelular.getText();
+			SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+			String dataNascimento = ftfDataNascimento.getText();
+			Calendar dataNascimentoCalendar = Calendar.getInstance();
+			try {
+				dataNascimentoCalendar.setTime(dataFormatada.parse(dataNascimento));
+			} catch (ParseException e) {
+
+				e.printStackTrace();
+			}
+			Funcionario func = new Funcionario(matricula, nome, null, cpf, celular, dataNascimentoCalendar);
+			func.setDepartamento(listaDepartamentos.get(indice - 1));
+			int linha = tableFuncionarios.getSelectedRow();
+			listaFuncionarios.set(linha, func);
+		}
 
 	}
 
 	private void alimentaTabelaFuncionario() {
 
-		if(listaFuncionarios.isEmpty()) {
-			return;	
+		if (listaFuncionarios.isEmpty()) {
+			return;
 		}
 
 		else {
-			int linha = listaFuncionarios.size() - 1 ; 
-			if (isEditarFunc==true) {
+			int linha = listaFuncionarios.size() - 1;
+			if (isEditarFunc == true) {
 				linha = tableFuncionarios.getSelectedRow();
 			}
 
-			DefaultTableModel tableModel = (DefaultTableModel)tableFuncionarios.getModel();
+			DefaultTableModel tableModel = (DefaultTableModel) tableFuncionarios.getModel();
 
-			Object[] arrayObj = {listaFuncionarios.get(linha).getMatricula(), 
-					listaFuncionarios.get(linha).getNome(),listaFuncionarios.get(linha).getDepartamento().getNome()}; 
-			if (isEditarFunc==true) {
-				tableModel.setValueAt(arrayObj[0], linha, 0); 
-				tableModel.setValueAt(arrayObj[1],linha, 1);
-				tableModel.setValueAt(arrayObj[2], linha,2); 
+			Object[] arrayObj = { listaFuncionarios.get(linha).getMatricula(), listaFuncionarios.get(linha).getNome(),
+					listaFuncionarios.get(linha).getCPF(), listaFuncionarios.get(linha).getCelular(),
+					listaFuncionarios.get(linha).getDataNascimento().getTime(),
+					listaFuncionarios.get(linha).getDepartamento().getNome(), };
+			if (isEditarFunc == true) {
+				tableModel.setValueAt(arrayObj[0], linha, 0);
+				tableModel.setValueAt(arrayObj[1], linha, 1);
+				tableModel.setValueAt(arrayObj[2], linha, 2);
+				tableModel.setValueAt(arrayObj[3], linha, 3);
+				tableModel.setValueAt(arrayObj[4], linha, 4);
+				tableModel.setValueAt(arrayObj[5], linha, 5);
 
 			} else {
-				tableModel.addRow(arrayObj);		
+				tableModel.addRow(arrayObj);
 
 			}
-
 
 		}
 
@@ -551,8 +625,7 @@ public class Principal {
 
 	private void selectionaLinhaTabelaFuncionarios() {
 
-
-		if(tableFuncionarios.getSelectedRow() > -1) { 
+		if (tableFuncionarios.getSelectedRow() > -1) {
 			botaoEditarFunc.setEnabled(true);
 			botaoExcluirFunc.setEnabled(true);
 
@@ -564,50 +637,42 @@ public class Principal {
 
 	}
 
-
 	private void alimentaCbFuncDep() {
 
 		cbFuncDep.removeAllItems();
 		cbFuncDep.addItem("Selecione Departamento...");
-		for(int i=0; i< listaDepartamentos.size(); i++) {
+		for (int i = 0; i < listaDepartamentos.size(); i++) {
 			cbFuncDep.addItem(listaDepartamentos.get(i).getNome());
 		}
 
 	}
 
-
 	private void mostraOcultaPanelDepCadastro() {
 
-		panelDepCadastros.setVisible(!panelDepCadastros.isVisible()); 	
-		botaoNovo.setEnabled(!panelDepCadastros.isVisible()); 
+		panelDepCadastros.setVisible(!panelDepCadastros.isVisible());
+		botaoNovo.setEnabled(!panelDepCadastros.isVisible());
 
-		botaoEditar.setEnabled(false); 
+		botaoEditar.setEnabled(false);
 		botaoExcluir.setEnabled(false);
 
-
-		if(!isEditar==true) {
+		if (!isEditar == true) {
 			tfDepCod.setText("");
 			tfDepNome.setText("");
-			ftfCPF.setText("000.000.000-00");
-			ftfCelular.setText("(00)00000-00");
-			ftfDataNascimento.setText("01/01/2001");
-			botaoSalvar.setText("SALVAR");  
+			botaoSalvar.setText("SALVAR");
 		} else {
 
 			int linha = tableDepartamentos.getSelectedRow();
 			Departamento dep = listaDepartamentos.get(linha);
-			tfDepCod.setText(dep.getCodigo()+"");
+			tfDepCod.setText(dep.getCodigo() + "");
 			tfDepNome.setText(dep.getNome());
-			botaoSalvar.setText("ATUALIZAR"); 
+			botaoSalvar.setText("ATUALIZAR");
 		}
-
 
 	}
 
 	private void alimentaListaDepartamento() {
 
-
-		if(isEditar==true) {
+		if (isEditar == true) {
 			updateDepartamento();
 		} else {
 			salvaDepartamento();
@@ -627,37 +692,37 @@ public class Principal {
 		int codigo = Integer.parseInt(tfDepCod.getText());
 		String nome = tfDepNome.getText();
 		Departamento dep = new Departamento(codigo, nome);
-		int linha = tableDepartamentos.getSelectedRow(); //seleciona a linha altera os valor e adiciona novamente na lista
+		int linha = tableDepartamentos.getSelectedRow(); // seleciona a linha altera os valor e adiciona novamente na
+															// lista
 		listaDepartamentos.set(linha, dep);
-
 
 	}
 
 	private void alimentaTabelaDepartamento() {
 
-		if(listaDepartamentos.isEmpty()) {
-			return;	
+		if (listaDepartamentos.isEmpty()) {
+			return;
 		}
 
 		else {
-			int linha = listaDepartamentos.size() - 1 ; // pegar o ultimo elemento da lista
-			if (isEditar==true) {
+			int linha = listaDepartamentos.size() - 1; // pegar o ultimo elemento da lista
+			if (isEditar == true) {
 				linha = tableDepartamentos.getSelectedRow();
 			}
 
-			DefaultTableModel tableModel = (DefaultTableModel)tableDepartamentos.getModel();
+			DefaultTableModel tableModel = (DefaultTableModel) tableDepartamentos.getModel();
 
-			Object[] arrayObj = {listaDepartamentos.get(linha).getCodigo(), 
-					listaDepartamentos.get(linha).getNome()}; //array de Objetos
-			if (isEditar==true) {
+			Object[] arrayObj = { listaDepartamentos.get(linha).getCodigo(), listaDepartamentos.get(linha).getNome() }; // array
+																														// de
+																														// Objetos
+			if (isEditar == true) {
 				tableModel.setValueAt(arrayObj[0], linha, 0); // codigo departamento;
-				tableModel.setValueAt(arrayObj[1],linha, 1); // nome departamento;
+				tableModel.setValueAt(arrayObj[1], linha, 1); // nome departamento;
 
 			} else {
-				tableModel.addRow(arrayObj);		
+				tableModel.addRow(arrayObj);
 
 			}
-
 
 		}
 		alimentaCbFuncDep();
@@ -666,8 +731,8 @@ public class Principal {
 
 	private void selectionaLinhaTabelaDepartamentos() {
 
-		//habilitar os botoes editar e excluri apens se houver uma linha selecionada
-		if(tableDepartamentos.getSelectedRow() > -1) { 
+		// habilitar os botoes editar e excluri apens se houver uma linha selecionada
+		if (tableDepartamentos.getSelectedRow() > -1) {
 			botaoEditar.setEnabled(true);
 			botaoExcluir.setEnabled(true);
 
@@ -677,7 +742,6 @@ public class Principal {
 
 		}
 
-	}	
+	}
+
 }
-
-
