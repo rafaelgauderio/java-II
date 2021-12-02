@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,6 +8,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 
 public class DataHoraJava {
 	
@@ -67,6 +69,16 @@ public class DataHoraJava {
 		System.out.println(zdt);
 		System.out.println(zdt2);
 		System.out.println(zdt3);
+		
+		
+		System.out.println("\nCalendar");
+		Calendar now = Calendar.getInstance();
+	    System.out.println(now.getTimeZone());  
+	    System.out.println(now.getTime());
+	    
+
+	   
+	  
 		
 		
 		
