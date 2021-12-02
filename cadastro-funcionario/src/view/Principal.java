@@ -465,7 +465,7 @@ public class Principal {
 			tfFuncNome.setText(func.getNome());
 			ftfCelular.setText(func.getCelular());
 			ftfCPF.setText(func.getCPF());
-			ftfDataNascimento.setText(func.getDataNascimento()+"");
+			ftfDataNascimento.setText(func.getDataNascimento().toString());
 			botaoSalvarFunc.setText("ATUALIZAR");
 		}
 
@@ -571,8 +571,8 @@ public class Principal {
 			String nome = tfFuncNome.getText();
 			String cpf = ftfCPF.getText();
 			String celular = ftfCelular.getText();
-			SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
 			String dataNascimento = ftfDataNascimento.getText();
+			SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");			
 			Calendar dataNascimentoCalendar = Calendar.getInstance();
 			try {
 				dataNascimentoCalendar.setTime(dataFormatada.parse(dataNascimento));
