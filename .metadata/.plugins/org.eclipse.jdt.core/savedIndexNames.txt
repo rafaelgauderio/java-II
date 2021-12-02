@@ -15,4 +15,3 @@ INDEX VERSION 1.131+C:\Users\DeLuca Tigrao\Desktop\java orientada a objetos\ws-j
 3459350386.index
 2328269416.index
 13608881.index
-2182521460.index
