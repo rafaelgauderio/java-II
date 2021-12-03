@@ -40,6 +40,7 @@ import javax.swing.JFormattedTextField;
 
 public class Principal {
 
+	
 	private JFrame frmTelaCadastro;
 	private JTable tableDepartamentos;
 	private JButton botaoNovo;
@@ -74,6 +75,7 @@ public class Principal {
 	private JFormattedTextField ftfCelular;
 	private String cpfSemMascara;
 	private String celularSemMascara;
+	private int idade;
 	
 
 	/**
@@ -479,63 +481,63 @@ public class Principal {
 			try {
 				salvaFuncionario();
 			} catch (ParseException e) {
-				
+
 				e.printStackTrace();
 			}
 		}
 
 	}
-	
+
 	private void retiraMascaraCPF() {
-		
-		cpfSemMascara=(ftfCPF.getText().replace(".","").replace("-",""));
-				
-		
+
+		cpfSemMascara = (ftfCPF.getText().replace(".", "").replace("-", ""));
+
 	}
-	
+
 	private void retiraMascaraCelular() {
-		
-		
-		celularSemMascara=(ftfCelular.getText().replace("-","").replace(")","").replace("(",""));		
-		
-		
+
+		celularSemMascara = (ftfCelular.getText().replace("-", "").replace(")", "").replace("(", ""));
+
 	}
 
 	private void salvaFuncionario() throws ParseException {
-		
+
 		int indice = cbFuncDep.getSelectedIndex();
+
 		
 		retiraMascaraCelular();
 		retiraMascaraCPF();
-				
+		
+		calculaIdade(ftfDataNascimento.getText());
+		
+		if (idade<18) {
+			JOptionPane.showMessageDialog(null, "O funcionário tem que possuir mais de 18 anos".toUpperCase());			
+		}
 
-		if (indice==0 ) {
+		else if (indice == 0) {
 			JOptionPane.showMessageDialog(null, "Tu deves selecionar um departamento!".toUpperCase());
-			
-		}		
-	
-		
 
-		else if (cpfSemMascara.length() != 11 ||cpfSemMascara.isEmpty() || cpfSemMascara.isBlank()) {
-			
+		}
+
+		else if (cpfSemMascara.length() != 11 || cpfSemMascara.isEmpty() || cpfSemMascara.isBlank()) {
+
 			JOptionPane.showMessageDialog(null, "CPF deve conter 11 digitos");
-			
+
 		}
-		
-		else if (celularSemMascara.length()!= 11 || celularSemMascara.isEmpty() || celularSemMascara.isBlank()) {
-			
+
+		else if (celularSemMascara.length() != 11 || celularSemMascara.isEmpty() || celularSemMascara.isBlank()) {
+
 			JOptionPane.showMessageDialog(null, "O número de celular deve conter 11 digitos");
-			
+
 		}
-		
-		else if(ftfDataNascimento.getText().isEmpty() || ftfDataNascimento.getText().isBlank()) {
-			
+
+		else if (ftfDataNascimento.getText().isEmpty() || ftfDataNascimento.getText().isBlank()) {
+
 			JOptionPane.showMessageDialog(null, "Preencha o campo data de nascimento");
 		}
 
+		else {//( (indice!=0 && cpfSemMascara.length()==11 && celularSemMascara.length()==11)) {
 
-		else { //(indice!=0 && cpfSemMascara.length()==11 && celularSemMascara.length()==11)
-			
 			int matricula = Integer.parseInt(tfFuncMat.getText());
 			String nome = tfFuncNome.getText();
 			String cpf = ftfCPF.getText();
@@ -554,9 +556,8 @@ public class Principal {
 			func.setDepartamento(listaDepartamentos.get(indice - 1));
 			listaDepartamentos.get(indice - 1).adicionaFuncionario(func);
 			listaFuncionarios.add(func);
-			
+
 		}
-		
 
 	}
 
@@ -572,19 +573,24 @@ public class Principal {
 			String cpf = ftfCPF.getText();
 			String celular = ftfCelular.getText();
 			String dataNascimento = ftfDataNascimento.getText();
-			SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");			
-			Calendar dataNascimentoCalendar = Calendar.getInstance();
-			try {
-				dataNascimentoCalendar.setTime(dataFormatada.parse(dataNascimento));
-			} catch (ParseException e) {
+			SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+			
+				Calendar dataNascimentoCalendar = Calendar.getInstance();
+				try {
+					dataNascimentoCalendar.setTime(dataFormatada.parse(dataNascimento));
+					Funcionario func = new Funcionario(matricula, nome, null, cpf, celular, dataNascimentoCalendar);
+					func.setDepartamento(listaDepartamentos.get(indice - 1));
+					int linha = tableFuncionarios.getSelectedRow();
+					listaFuncionarios.set(linha, func);
+				} catch (ParseException e) {
 
-				e.printStackTrace();
-			}
-			Funcionario func = new Funcionario(matricula, nome, null, cpf, celular, dataNascimentoCalendar);
-			func.setDepartamento(listaDepartamentos.get(indice - 1));
-			int linha = tableFuncionarios.getSelectedRow();
-			listaFuncionarios.set(linha, func);
-		}
+					e.printStackTrace();
+				}
+
+				
+			}	
+
+		
 
 	}
 
@@ -602,10 +608,11 @@ public class Principal {
 
 			DefaultTableModel tableModel = (DefaultTableModel) tableFuncionarios.getModel();
 
+			SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
 			Object[] arrayObj = { listaFuncionarios.get(linha).getMatricula(), listaFuncionarios.get(linha).getNome(),
 					listaFuncionarios.get(linha).getCPF(), listaFuncionarios.get(linha).getCelular(),
-					listaFuncionarios.get(linha).getDataNascimento().getTime(),
-					listaFuncionarios.get(linha).getDepartamento().getNome(), };
+					dataFormatada.format(listaFuncionarios.get(linha).getDataNascimento().getTime()),
+					listaFuncionarios.get(linha).getDepartamento().getNome() };
 			if (isEditarFunc == true) {
 				tableModel.setValueAt(arrayObj[0], linha, 0);
 				tableModel.setValueAt(arrayObj[1], linha, 1);
@@ -645,6 +652,27 @@ public class Principal {
 			cbFuncDep.addItem(listaDepartamentos.get(i).getNome());
 		}
 
+	}
+	
+	private void calculaIdade(String dataNascimento) {
+		
+		//dataNascimento = ftfDataNascimento.getText();
+		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");		
+		Calendar dataNascimentoCalendar = Calendar.getInstance();		
+		try {
+			dataNascimentoCalendar.setTime(dataFormatada.parse(dataNascimento));
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		Calendar hoje = Calendar.getInstance();
+		
+		int anoHoje = hoje.get(Calendar.YEAR);
+		int anoNascimento=dataNascimentoCalendar.get(Calendar.YEAR);
+		idade = anoHoje-anoNascimento;		
+		
 	}
 
 	private void mostraOcultaPanelDepCadastro() {

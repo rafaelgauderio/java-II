@@ -14,5 +14,6 @@ INDEX VERSION 1.131+C:\Users\rafael.NTM\Desktop\java orientado a objetos\wf-ifrs
 770489185.index
 1817586229.index
 3945864156.index
+117774581.index
 3082687445.index
 589370756.index
