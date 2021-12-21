@@ -63,6 +63,10 @@ public class Transferencia extends JFrame {
 		textFieldValorTransf.setBounds(201, 80, 197, 20);
 		contentPane.add(textFieldValorTransf);
 		textFieldValorTransf.setColumns(10);
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnConfirmar.setBounds(120, 143, 179, 41);
 		contentPane.add(btnConfirmar);

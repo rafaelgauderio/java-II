@@ -71,6 +71,10 @@ public class RelatorioIndividual extends JFrame {
 		contentPane.add(textFieldCodigoCliente);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnBuscar.setBounds(432, 32, 123, 41);
 		contentPane.add(btnBuscar);

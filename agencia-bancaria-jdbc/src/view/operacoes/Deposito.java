@@ -61,6 +61,10 @@ public class Deposito extends JFrame {
 		textFieldDeposito.setBounds(210, 80, 197, 20);
 		contentPane.add(textFieldDeposito);
 		textFieldDeposito.setColumns(10);
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnConfirmar.setBounds(120, 143, 179, 41);
 		contentPane.add(btnConfirmar);

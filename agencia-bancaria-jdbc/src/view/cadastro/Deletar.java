@@ -58,7 +58,9 @@ public class Deletar extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
-		});
+		});		
+		
+		
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnCancelar.setBounds(31, 88, 179, 41);
 		contentPane.add(btnCancelar);
@@ -70,6 +72,10 @@ public class Deletar extends JFrame {
 		contentPane.add(textFieldCodigoCliente);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnBuscar.setBounds(432, 32, 123, 41);
 		contentPane.add(btnBuscar);

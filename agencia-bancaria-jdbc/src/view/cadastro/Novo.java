@@ -120,6 +120,10 @@ public class Novo extends JFrame {
 		textField.setColumns(10);
 		textField.setBounds(408, 218, 168, 20);
 		contentPane.add(textField);
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnSalvar.setBounds(125, 262, 179, 41);
 		contentPane.add(btnSalvar);

@@ -118,6 +118,10 @@ public class Atualizar extends JFrame {
 		textField.setColumns(10);
 		textField.setBounds(408, 245, 168, 20);
 		contentPane.add(textField);
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnSalvar.setBounds(125, 290, 179, 41);
 		contentPane.add(btnSalvar);
@@ -144,6 +148,10 @@ public class Atualizar extends JFrame {
 		contentPane.add(textFieldCodigoCliente);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnBuscar.setBounds(432, 32, 123, 41);
 		contentPane.add(btnBuscar);
