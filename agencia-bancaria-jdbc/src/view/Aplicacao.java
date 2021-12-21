@@ -12,7 +12,7 @@ import javax.swing.JMenuItem;
 
 import util.SairAction;
 import util.SobreAction;
-import javax.swing.JRadioButtonMenuItem;
+import view.cadastro.Novo;
 
 
 
@@ -70,7 +70,19 @@ public class Aplicacao {
 		cadastro.add(cliente);		
 		
 		JMenuItem novo = new JMenuItem();
-		novo.setText("Novo");		
+		novo.setText("Novo");
+		novo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Novo frame = new Novo();
+				frame.setVisible(true);				
+				
+			}
+			
+		});
+		
 		JMenuItem atualizar = new JMenuItem();
 		atualizar.setText("Atualizar");			
 		JMenuItem deletar = new JMenuItem();
