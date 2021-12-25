@@ -1,22 +1,23 @@
 package view.operacoes;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class Deposito extends JFrame {
 
+	
+	private static final long serialVersionUID = 1L;
+	public JFrame frame;	
 	private JPanel contentPane;
 	private JTextField textFieldDeposito;
 	private final JButton btnConfirmar = new JButton("Confirmar");
@@ -29,8 +30,8 @@ public class Deposito extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Deposito frame = new Deposito();
-					frame.setVisible(true);
+					Deposito window = new Deposito();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,13 +43,20 @@ public class Deposito extends JFrame {
 	 * Create the frame.
 	 */
 	public Deposito() {
-		setTitle("Dep\u00F3sito");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		initialize();
+	}
+	
+	public void initialize() {
+		
+		frame = new JFrame();
+		frame.setTitle("Dep\u00F3sito");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 600, 400);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		frame.setContentPane(contentPane);
 		
 		JLabel lbCodigoCliente = new JLabel("C\u00F3d. Cliente:");
 		lbCodigoCliente.setBounds(81, 32, 110, 35);
@@ -72,7 +80,10 @@ public class Deposito extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				frame.dispose();
 			}
+			
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnCancelar.setBounds(332, 143, 179, 41);

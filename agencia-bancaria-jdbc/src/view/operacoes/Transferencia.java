@@ -17,6 +17,9 @@ import java.awt.event.ActionEvent;
 
 public class Transferencia extends JFrame {
 
+		
+	private static final long serialVersionUID = 1L;
+	public JFrame frame;
 	private JPanel contentPane;
 	private JTextField textFieldValorTransf;
 	private final JButton btnConfirmar = new JButton("Confirmar");
@@ -31,8 +34,8 @@ public class Transferencia extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Transferencia frame = new Transferencia();
-					frame.setVisible(true);
+					Transferencia window = new Transferencia();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,15 +45,24 @@ public class Transferencia extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * 
+	 * 
 	 */
 	public Transferencia() {
-		setTitle("Transfer\u00EAncias");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		initialize();
+	}
+	
+	
+	public void initialize() {
+		
+		frame = new JFrame();
+		frame.setTitle("Transfer\u00EAncias");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		frame.setContentPane(contentPane);
 		
 		JLabel lblCclienteRecebe = new JLabel("C\u00F3d. Cliente recebedor:");
 		lblCclienteRecebe.setBounds(301, 34, 191, 35);
@@ -74,6 +86,9 @@ public class Transferencia extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				frame.dispose();
+				
 			}
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));

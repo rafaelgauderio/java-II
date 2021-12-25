@@ -6,23 +6,31 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import view.Aplicacao;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Atualizar extends JFrame {
+public class Atualizar extends JFrame {	
 
+	private static final long serialVersionUID = 1L;
+	
+	public JFrame frame;
 	private JPanel contentPane;
 	private JTextField textFieldNome;
 	private JTextField textFieldDataNascimento;
 	private JTextField textFieldEndereco;
 	private JTextField textField;
-	private final JButton btnSalvar = new JButton("Salvar");
+	private final JButton btnSalvar = new JButton("Atualizar");
 	private JTextField textFieldCodigoCliente;
 
 	/**
@@ -32,26 +40,36 @@ public class Atualizar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Atualizar frame = new Atualizar();
-					frame.setVisible(true);
+					Atualizar window = new Atualizar();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+	
+	public Atualizar() {
+		initialize();
+	}
 
 	/**
-	 * Create the frame.
-	 */
-	public Atualizar() {
-		setTitle("Atualiza\u00E7\u00E3o de Cliente");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+	 * Initialize the contents of the frame.
+	 */	
+
+	
+	public void initialize() {
+		frame = new JFrame();
+		frame.setTitle("Atualiza\u00E7\u00E3o de Cliente");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 600, 400);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		frame.setContentPane(contentPane);
+		contentPane.setLayout(null);		
+	
+		
 		
 		JLabel lblNome = new JLabel("C\u00F3d. Cliente:");
 		lblNome.setBounds(81, 32, 110, 35);
@@ -129,6 +147,8 @@ public class Atualizar extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				frame.dispose();
 			}
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));

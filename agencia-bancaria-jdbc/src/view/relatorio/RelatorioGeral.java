@@ -1,36 +1,30 @@
 package view.relatorio;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.border.BevelBorder;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.border.TitledBorder;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
-import java.awt.GridLayout;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class RelatorioGeral extends JFrame {
 
+	
+	
+	private static final long serialVersionUID = 1L;
+	public JFrame frame;
 	private JPanel panelClientes;
 	private JTable tableClientes;
 	private JTextArea textAreaClientes;
@@ -42,8 +36,8 @@ public class RelatorioGeral extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RelatorioGeral frame = new RelatorioGeral();
-					frame.setVisible(true);
+					RelatorioGeral window = new RelatorioGeral();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,18 +48,26 @@ public class RelatorioGeral extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public RelatorioGeral() {
-		setTitle("Relat\u00F3rio Geral de Clientes");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 750, 450);
+		initialize();
+	}
+	
+	public void  initialize() {
+		frame = new JFrame();
+		frame.setTitle("Relat\u00F3rio Geral de Clientes");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 750, 450);
 		panelClientes	= new JPanel();
 		panelClientes.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(panelClientes);
+		frame.setContentPane(panelClientes);
 		
 		JButton btnFechar = new JButton("Fechar");
 		btnFechar.setBounds(521, 311, 112, 41);
 		btnFechar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				frame.dispose();
 			}
 		});
 		panelClientes.setLayout(null);

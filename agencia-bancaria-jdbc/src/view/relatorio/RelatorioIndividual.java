@@ -1,23 +1,25 @@
 package view.relatorio;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class RelatorioIndividual extends JFrame {
 
+	
+	private static final long serialVersionUID = 1L;	
+	public JFrame frame;
 	private JPanel contentPane;
 	private JTextField textFieldCodigoCliente;
 
@@ -40,14 +42,21 @@ public class RelatorioIndividual extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public RelatorioIndividual() {
-		setTitle("Relat\u00F3rio Individual de Cliente");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		initialize();
+	}
+	
+	public void initialize() {
+		
+		frame = new JFrame();		
+		frame.setTitle("Relat\u00F3rio Individual de Cliente");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		frame.setContentPane(contentPane);
 		
 		JLabel lblNome = new JLabel("C\u00F3d. Cliente:");
 		lblNome.setBounds(81, 32, 110, 35);
@@ -58,6 +67,8 @@ public class RelatorioIndividual extends JFrame {
 		JButton btnFechar = new JButton("Fechar");
 		btnFechar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				frame.dispose();
 			}
 		});
 		btnFechar.setFont(new Font("Tahoma", Font.BOLD, 14));

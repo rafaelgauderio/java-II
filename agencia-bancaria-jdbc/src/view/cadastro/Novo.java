@@ -1,22 +1,24 @@
 package view.cadastro;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class Novo extends JFrame {
-
+	
+	
+	private static final long serialVersionUID = 1L;
+	public JFrame frame;
 	private JPanel contentPane;
 	private JTextField textFieldCodigoCliente;
 	private JTextField textFieldDataNascimento;
@@ -31,8 +33,8 @@ public class Novo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Novo frame = new Novo();
-					frame.setVisible(true);
+					Novo window = new Novo();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -40,17 +42,20 @@ public class Novo extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Novo() {
-		setTitle("Novo Cliente\r\n");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		initialize();
+	}
+	
+	
+	public void initialize() {
+		frame = new JFrame();
+		frame.setTitle("Novo Cliente\r\n");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		frame.setContentPane(contentPane);
 		
 		JLabel lblNome = new JLabel("C\u00F3d. Cliente");
 		lblNome.setBounds(74, 27, 117, 35);
@@ -131,6 +136,9 @@ public class Novo extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				frame.dispose();
+				
 			}
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 14));
