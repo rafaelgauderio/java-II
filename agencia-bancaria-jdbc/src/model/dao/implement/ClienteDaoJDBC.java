@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import database.DB;
@@ -103,8 +104,47 @@ public class ClienteDaoJDBC implements ClienteDao {
 
 	@Override
 	public List<Cliente> searchAllClients() {
-		// TODO Auto-generated method stub
-		return null;
+		
+
+		PreparedStatement st = null;
+		ResultSet rs = null;
+
+		try {
+
+			st = conectar.prepareStatement(
+
+					"SELECT codCliente, nome, endereco, sexo, DataNascimento, saldo " + "FROM cliente "
+							+ "ORDER BY codCliente");
+			
+			rs = st.executeQuery();
+			List<Cliente> lista = new ArrayList<Cliente>();
+			
+			
+			while (rs.next()) {
+
+				Cliente cliente = new Cliente();
+				cliente.setCodCliente(rs.getInt("codCliente"));
+				cliente.setNome(rs.getString("nome"));
+				cliente.setEndereco(rs.getString("endereco"));
+				cliente.setSexo(rs.getString("sexo"));
+				cliente.setDataNascimento(rs.getDate("DataNascimento"));
+				cliente.setSaldo(rs.getDouble("saldo"));
+				
+				lista.add(cliente);
+
+			}
+			
+			return lista;
+			
+		} catch (SQLException erro) {
+			throw new DbException(erro.getMessage());
+		} finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}	
+		
+		
+		
 	}
 
 }

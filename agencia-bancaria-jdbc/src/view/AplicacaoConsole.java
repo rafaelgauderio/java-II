@@ -1,13 +1,13 @@
 package view;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import database.DB;
 import model.Cliente;
@@ -35,8 +35,18 @@ public class AplicacaoConsole {
 		Cliente cliente = clienteDao.searchByCod(3);
 		System.out.println(cliente);
 		
+		System.out.println("\nTESTANDO SEARCHALLCLIENTS");
+		List<Cliente> lista = new ArrayList<Cliente>();
+		lista = clienteDao.searchAllClients();
+		for(Cliente objeto : lista) {
+			System.out.println(objeto);
+			
+		}
 		
 		
+		
+		/*
+		//testando conexão
 				
 		Connection co = null;
 		Statement st = null;
@@ -73,7 +83,7 @@ public class AplicacaoConsole {
 		}
 		
 		
-		
+		*/
 
 		
 	}
