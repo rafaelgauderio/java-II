@@ -135,9 +135,10 @@ public class ClienteDaoJDBC implements ClienteDao {
 
 			st.setInt(1, codCliente);
 			rs = st.executeQuery();
+			Cliente cliente = new Cliente();
 			if (rs.next()) {
 
-				Cliente cliente = new Cliente();
+				
 				cliente.setCodCliente(rs.getInt("codCliente"));
 				cliente.setNome(rs.getString("nome"));
 				cliente.setEndereco(rs.getString("endereco"));
@@ -146,6 +147,9 @@ public class ClienteDaoJDBC implements ClienteDao {
 				cliente.setSaldo(rs.getDouble("saldo"));
 				return cliente;
 
+			} else  {
+				System.out.println("Códido do cliente não encontrado.");
+				
 			}
 			return null;
 		} catch (SQLException erro) {

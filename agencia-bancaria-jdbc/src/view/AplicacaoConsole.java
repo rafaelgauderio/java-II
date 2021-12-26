@@ -1,15 +1,10 @@
 package view;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.DB;
 import model.Cliente;
 import model.dao.ClienteDao;
 import model.dao.DaoFactory;
@@ -21,12 +16,12 @@ public class AplicacaoConsole {
 		ClienteDao clienteDao = DaoFactory.criarClienteDao();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
-		java.sql.Date date = new java.sql.Date(sdf.parse("15/12/1995").getDate());
+		java.sql.Date date = new java.sql.Date(sdf.parse("05/12/1995").getTime());
 		
 				
 			
-		System.out.println("\nTESTANDO O PROCURAR POR CODIGO DO CLIENTE");
-		Cliente cliente = clienteDao.searchByCod(3);
+		System.out.println("TESTANDO O PROCURAR POR CODIGO DO CLIENTE");
+		Cliente cliente = clienteDao.searchByCod(17);
 		System.out.println(cliente);
 		
 		System.out.println("\nTESTANDO SEARCHALLCLIENTS");
