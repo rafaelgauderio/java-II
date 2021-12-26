@@ -9,7 +9,7 @@ public class Cliente implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private int codCliente;
+	private Integer codCliente;
 	private String nome;
 	private String endereco;
 	private String sexo;
@@ -20,7 +20,7 @@ public class Cliente implements Serializable {
 		
 	}
 
-	public Cliente(int codCliente, String nome, String endereco, String sexo, Date dataNascimento, double saldo) {
+	public Cliente(Integer codCliente, String nome, String endereco, String sexo, Date dataNascimento, double saldo) {
 		super();
 		this.codCliente = codCliente;
 		this.nome = nome;
@@ -29,12 +29,22 @@ public class Cliente implements Serializable {
 		this.dataNascimento = dataNascimento;
 		this.saldo = saldo;
 	}
+	
+	public Cliente(String nome, String endereco, String sexo, Date dataNascimento, double saldo) {
+		
+		this.nome = nome;
+		this.endereco = endereco;
+		this.sexo = sexo;
+		this.dataNascimento = dataNascimento;
+		this.saldo = saldo;
+	}
+	
 
-	public int getCodCliente() {
+	public Integer getCodCliente() {
 		return codCliente;
 	}
 
-	public void setCodCliente(int codCliente) {
+	public void setCodCliente(Integer codCliente) {
 		this.codCliente = codCliente;
 	}
 
