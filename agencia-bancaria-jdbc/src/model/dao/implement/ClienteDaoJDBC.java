@@ -53,15 +53,43 @@ public class ClienteDaoJDBC implements ClienteDao {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void update(Cliente cliente) {
-		// TODO Auto-generated method stub
+		
+		PreparedStatement st = null;
+		try {
+			
+			st = conectar.prepareStatement("UPDATE cliente "
+					+ "SET nome= ?, endereco=?, sexo=?, dataNascimento=?, saldo=? "
+					+ "WHERE codCliente = ?");
+			
+			st.setString(1,cliente.getNome());
+			st.setString(2,cliente.getEndereco());
+			st.setString(3, cliente.getSexo());
+			st.setDate(4, new java.sql.Date(cliente.getDataNascimento().getDate()));
+			st.setDouble(5, cliente.getSaldo());
+			st.setInt(6,cliente.getCodCliente());
+			
+			st.execute();			
+			System.out.println("Dados do Cliente ATUALIZADOS COM SUCESSO!");
+			
+			
+		} catch(SQLException erro) {
+			
+			throw new DbException(erro.getMessage());
+						
+		} finally {
+			DB.closeConnection();
+		}
+		
+		
 
 	}
 
 	@Override
 	public void deleteByCod(Integer codCliente) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

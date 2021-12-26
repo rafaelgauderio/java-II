@@ -25,10 +25,7 @@ public class AplicacaoConsole {
 		
 		
 		
-		System.out.println("TESTANDO INSERT");
-		Cliente clienteNovo = new Cliente(null,"Mariana De Luca ","Rua Sertorio 35, Apto: 25","F",date,3800.50);
-		clienteDao.insert(clienteNovo);
-		System.out.println("CLIENTE INSERIDO COM SUCESSO. Codigo do cliente novo: " + clienteNovo.getCodCliente() +"\n" );
+	
 		
 		
 		System.out.println("\nTESTANDO O PROCURAR POR CODIGO DO CLIENTE");
@@ -42,6 +39,21 @@ public class AplicacaoConsole {
 			System.out.println(objeto);
 			
 		}
+		
+		System.out.println("\nTESTANDO INSERT");
+		Cliente clienteNovo = new Cliente(null,"Mariana De Luca ","Rua Sertorio 35, Apto: 25","F",date,3800.50);
+		clienteDao.insert(clienteNovo);
+		System.out.println("CLIENTE INSERIDO COM SUCESSO. Codigo do cliente novo: " + clienteNovo.getCodCliente() +"\n" );
+		
+		System.out.println("\nTESTANDO UPDATE");
+		Cliente clienteUpdate = clienteDao.searchByCod(3);
+		clienteUpdate.setNome("Juliana da Silva");
+		clienteUpdate.setEndereco("Rua nova lima 50");
+		clienteUpdate.setSexo("F");
+		java.sql.Date dateUpdate = new java.sql.Date(sdf.parse("17/08/1995").getDate());
+		clienteUpdate.setDataNascimento(dateUpdate);
+		clienteDao.update(clienteUpdate);
+		
 		
 		
 		
