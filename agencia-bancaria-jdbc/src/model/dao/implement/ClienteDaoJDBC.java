@@ -80,7 +80,7 @@ public class ClienteDaoJDBC implements ClienteDao {
 			throw new DbException(erro.getMessage());
 						
 		} finally {
-			DB.closeConnection();
+			DB.closeStatement(st);
 		}
 		
 		
@@ -89,6 +89,33 @@ public class ClienteDaoJDBC implements ClienteDao {
 
 	@Override
 	public void deleteByCod(Integer codCliente) {
+		
+		PreparedStatement st = null;
+		
+		try {
+			st = conectar.prepareStatement("DELETE FROM cliente "
+					+ "WHERE codCliente = ?" );
+			st.setInt(1, codCliente);
+			
+			int linhasDeletadas = st.executeUpdate();
+			
+			if(linhasDeletadas == 0) {
+				
+				System.out.println("O código do cliente informado NÃO EXISTE. Nenhum dado foi alterado. EXCLUSÃO NÃO REALIZADA!");
+				
+			} else {
+				System.out.println("Dados EXCLUIDOS com sucesso");
+			}
+			
+			
+			
+			
+		} catch (SQLException erro) {
+			throw new DbException (erro.getMessage());
+			
+		} finally {
+			DB.closeStatement(st);
+		}
 		
 
 	}

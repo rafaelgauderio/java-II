@@ -23,11 +23,8 @@ public class AplicacaoConsole {
 		SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
 		java.sql.Date date = new java.sql.Date(sdf.parse("15/12/1995").getDate());
 		
-		
-		
-	
-		
-		
+				
+			
 		System.out.println("\nTESTANDO O PROCURAR POR CODIGO DO CLIENTE");
 		Cliente cliente = clienteDao.searchByCod(3);
 		System.out.println(cliente);
@@ -46,7 +43,7 @@ public class AplicacaoConsole {
 		System.out.println("CLIENTE INSERIDO COM SUCESSO. Codigo do cliente novo: " + clienteNovo.getCodCliente() +"\n" );
 		
 		System.out.println("\nTESTANDO UPDATE");
-		Cliente clienteUpdate = clienteDao.searchByCod(3);
+		Cliente clienteUpdate = clienteDao.searchByCod(5);
 		clienteUpdate.setNome("Juliana da Silva");
 		clienteUpdate.setEndereco("Rua nova lima 50");
 		clienteUpdate.setSexo("F");
@@ -54,6 +51,14 @@ public class AplicacaoConsole {
 		clienteUpdate.setDataNascimento(dateUpdate);
 		clienteDao.update(clienteUpdate);
 		
+		
+		System.out.println("\nTESTANDO DELETE");
+		System.out.println("Excluindo id = 15" );
+		clienteDao.deleteByCod(15);
+		System.out.println("Excluindo um id que não tem no database");
+		clienteDao.deleteByCod(356);
+		
+			
 		
 		
 		
