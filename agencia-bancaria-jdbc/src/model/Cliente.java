@@ -84,12 +84,11 @@ public class Cliente implements Serializable {
 		return saldo;
 	}
 
-	//movimentar o saldo apenas por deposito, saque ou transferência
-	/*
+	
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
-	*/
+	
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

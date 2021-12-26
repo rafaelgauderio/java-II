@@ -8,8 +8,8 @@ public interface ClienteDao {
 	
 	void insert(Cliente cliente);
 	void update(Cliente cliente);
-	void deleteById(Integer id);
-	Cliente searchById(Integer id);
+	void deleteByCod(Integer CodCliente);
+	Cliente searchByCod(Integer codCliente);
 	List<Cliente> searchAllClients();	
 		
 	

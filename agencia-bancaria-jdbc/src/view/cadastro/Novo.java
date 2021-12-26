@@ -120,7 +120,6 @@ public class Novo extends JFrame {
 		contentPane.add(textFieldEndereco);
 		
 		textField = new JTextField();
-		textField.setEditable(false);
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textField.setColumns(10);
 		textField.setBounds(408, 218, 168, 20);
