@@ -56,67 +56,59 @@ public class ClienteDaoJDBC implements ClienteDao {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void update(Cliente cliente) {
-		
+
 		PreparedStatement st = null;
 		try {
-			
+
 			st = conectar.prepareStatement("UPDATE cliente "
-					+ "SET nome= ?, endereco=?, sexo=?, dataNascimento=?, saldo=? "
-					+ "WHERE codCliente = ?");
-			
-			st.setString(1,cliente.getNome());
-			st.setString(2,cliente.getEndereco());
+					+ "SET nome= ?, endereco=?, sexo=?, dataNascimento=?, saldo=? " + "WHERE codCliente = ?");
+
+			st.setString(1, cliente.getNome());
+			st.setString(2, cliente.getEndereco());
 			st.setString(3, cliente.getSexo());
 			st.setDate(4, new java.sql.Date(cliente.getDataNascimento().getDate()));
 			st.setDouble(5, cliente.getSaldo());
-			st.setInt(6,cliente.getCodCliente());
-			
-			st.execute();			
+			st.setInt(6, cliente.getCodCliente());
+
+			st.executeUpdate();
 			System.out.println("Dados do Cliente ATUALIZADOS COM SUCESSO!");
-			
-			
-		} catch(SQLException erro) {
-			
+
+		} catch (SQLException erro) {
+
 			throw new DbException(erro.getMessage());
-						
+
 		} finally {
 			DB.closeStatement(st);
 		}
-		
-		
 
 	}
 
 	@Override
 	public void deleteByCod(Integer codCliente) {
-		
+
 		PreparedStatement st = null;
-		
+
 		try {
-			st = conectar.prepareStatement("DELETE FROM cliente "
-					+ "WHERE codCliente = ?" );
+			st = conectar.prepareStatement("DELETE FROM cliente " + "WHERE codCliente = ?");
 			st.setInt(1, codCliente);
-			
+
 			int linhasDeletadas = st.executeUpdate();
-			
-			if(linhasDeletadas == 0) {
-				
-				System.out.println("O código do cliente informado NÃO EXISTE. Nenhum dado foi alterado. EXCLUSÃO NÃO REALIZADA!");
-				
+
+			if (linhasDeletadas == 0) {
+
+				System.out.println(
+						"O código do cliente informado NÃO EXISTE. Nenhum dado foi alterado. EXCLUSÃO NÃO REALIZADA!");
+
 			} else {
 				System.out.println("Dados EXCLUIDOS com sucesso");
 			}
-			
-			
-			
-			
+
 		} catch (SQLException erro) {
-			throw new DbException (erro.getMessage());
-			
+			throw new DbException(erro.getMessage());
+
 		} finally {
 			DB.closeStatement(st);
 		}
-		
 
 	}
 
@@ -138,7 +130,6 @@ public class ClienteDaoJDBC implements ClienteDao {
 			Cliente cliente = new Cliente();
 			if (rs.next()) {
 
-				
 				cliente.setCodCliente(rs.getInt("codCliente"));
 				cliente.setNome(rs.getString("nome"));
 				cliente.setEndereco(rs.getString("endereco"));
@@ -147,9 +138,9 @@ public class ClienteDaoJDBC implements ClienteDao {
 				cliente.setSaldo(rs.getDouble("saldo"));
 				return cliente;
 
-			} else  {
+			} else {
 				System.out.println("Códido do cliente não encontrado.");
-				
+
 			}
 			return null;
 		} catch (SQLException erro) {
@@ -163,7 +154,6 @@ public class ClienteDaoJDBC implements ClienteDao {
 
 	@Override
 	public List<Cliente> searchAllClients() {
-		
 
 		PreparedStatement st = null;
 		ResultSet rs = null;
@@ -174,11 +164,10 @@ public class ClienteDaoJDBC implements ClienteDao {
 
 					"SELECT codCliente, nome, endereco, sexo, DataNascimento, saldo " + "FROM cliente "
 							+ "ORDER BY codCliente");
-			
+
 			rs = st.executeQuery();
 			List<Cliente> lista = new ArrayList<Cliente>();
-			
-			
+
 			while (rs.next()) {
 
 				Cliente cliente = new Cliente();
@@ -188,22 +177,120 @@ public class ClienteDaoJDBC implements ClienteDao {
 				cliente.setSexo(rs.getString("sexo"));
 				cliente.setDataNascimento(rs.getDate("DataNascimento"));
 				cliente.setSaldo(rs.getDouble("saldo"));
-				
+
 				lista.add(cliente);
 
 			}
-			
+
 			return lista;
-			
+
 		} catch (SQLException erro) {
 			throw new DbException(erro.getMessage());
 		} finally {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
-		}	
-		
-		
-		
+		}
+
 	}
+
+	@Override
+	public void updateDeposito(Integer codCliente, double valor) {
+
+		PreparedStatement st1 = null;
+		PreparedStatement st2 = null;
+		ResultSet rs = null;
+
+		try {
+
+			st1 = conectar.prepareStatement(
+
+					"SELECT codCliente, saldo " + "FROM cliente " + "WHERE cliente.codCliente = ?");
+
+			st1.setInt(1, codCliente);
+			rs = st1.executeQuery();
+			Cliente cliente = new Cliente();
+			
+			if (rs.next() && valor >= 0) {
+				
+				cliente.setCodCliente(rs.getInt("codCliente"));
+				cliente.setSaldo(rs.getDouble("saldo"));
+
+				st2 = conectar.prepareStatement("UPDATE cliente " + "SET saldo=? " + "WHERE codCliente = ?");
+
+				st2.setDouble(1, (cliente.getSaldo() + valor));
+				st2.setInt(2, cliente.getCodCliente());
+				st2.executeUpdate();
+				System.out.println("DEPOSITO realizado COM SUCESSO!");
+
+
+			} else {
+				System.out.println("Códido do cliente não encontrado. Ou valor informado de depósito inválido!");
+
+			}		
+
+		}
+
+		catch (SQLException erro) {
+
+			throw new DbException(erro.getMessage());
+
+		} finally {
+			DB.closeStatement(st1);
+			DB.closeStatement(st2);
+			DB.closeResultSet(rs);
+		}
+
+	}
+	
+	@Override
+	public void updateSaque(Integer codCliente, double valor) {
+
+		PreparedStatement st1 = null;
+		PreparedStatement st2 = null;
+		ResultSet rs = null;
+
+		try {
+
+			st1 = conectar.prepareStatement(
+
+					"SELECT codCliente, saldo " + "FROM cliente " + "WHERE cliente.codCliente = ?");
+
+			st1.setInt(1, codCliente);
+			rs = st1.executeQuery();
+			Cliente cliente = new Cliente();
+			
+			
+			if (rs.next() && valor >= 0 && valor <= rs.getDouble("saldo") ) {
+				
+				cliente.setCodCliente(rs.getInt("codCliente"));
+				cliente.setSaldo(rs.getDouble("saldo"));
+
+				st2 = conectar.prepareStatement("UPDATE cliente " + "SET saldo=? " + "WHERE codCliente = ?");
+
+				st2.setDouble(1, (cliente.getSaldo() - valor));
+				st2.setInt(2, cliente.getCodCliente());
+				st2.executeUpdate();
+				System.out.println("SAQUE realizado COM SUCESSO!");
+
+
+			} else {
+				System.out.println("Códido do cliente não encontrado. Ou valor informado para Saque inválido ou maior que saldo do correntista!");
+
+			}		
+
+		}
+
+		catch (SQLException erro) {
+
+			throw new DbException(erro.getMessage());
+
+		} finally {
+			DB.closeStatement(st1);
+			DB.closeStatement(st2);
+			DB.closeResultSet(rs);
+		}
+
+	}
+	
 
 }

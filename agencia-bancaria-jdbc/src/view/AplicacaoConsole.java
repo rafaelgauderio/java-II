@@ -53,6 +53,20 @@ public class AplicacaoConsole {
 		System.out.println("Excluindo um id que não tem no database");
 		clienteDao.deleteByCod(356);
 		
+		System.out.println("\nTESTANDO DEPOSITO");
+		clienteDao.updateDeposito(1,5000);
+		clienteDao.updateDeposito(2,4000);
+		clienteDao.updateDeposito(4,6000.50);
+		clienteDao.updateDeposito(5,6000.50);
+		
+		
+		System.out.println("\nTESTANDO SAQUE");
+		clienteDao.updateSaque(5,1500);
+		clienteDao.updateSaque(6,3000);
+		clienteDao.updateSaque(7,-800);
+		clienteDao.updateSaque(700,2500);
+		
+		
 			
 		
 		
