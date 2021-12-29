@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -71,6 +72,13 @@ public class Deposito extends JFrame {
 		textFieldDeposito.setColumns(10);
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(frame,
+				        "DEPOSITO REALIZADO COM SUCESSO", 
+				        "DEPOSITO", // 
+				        JOptionPane.INFORMATION_MESSAGE);
+				
+				
 			}
 		});
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 14));

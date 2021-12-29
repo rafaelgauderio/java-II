@@ -209,9 +209,9 @@ public class ClienteDaoJDBC implements ClienteDao {
 			st1.setInt(1, codCliente);
 			rs = st1.executeQuery();
 			Cliente cliente = new Cliente();
-			
+
 			if (rs.next() && valor >= 0) {
-				
+
 				cliente.setCodCliente(rs.getInt("codCliente"));
 				cliente.setSaldo(rs.getDouble("saldo"));
 
@@ -222,11 +222,10 @@ public class ClienteDaoJDBC implements ClienteDao {
 				st2.executeUpdate();
 				System.out.println("DEPOSITO realizado COM SUCESSO!");
 
-
 			} else {
 				System.out.println("Códido do cliente não encontrado. Ou valor informado de depósito inválido!");
 
-			}		
+			}
 
 		}
 
@@ -241,7 +240,7 @@ public class ClienteDaoJDBC implements ClienteDao {
 		}
 
 	}
-	
+
 	@Override
 	public void updateSaque(Integer codCliente, double valor) {
 
@@ -258,10 +257,9 @@ public class ClienteDaoJDBC implements ClienteDao {
 			st1.setInt(1, codCliente);
 			rs = st1.executeQuery();
 			Cliente cliente = new Cliente();
-			
-			
-			if (rs.next() && valor >= 0 && valor <= rs.getDouble("saldo") ) {
-				
+
+			if (rs.next() && valor >= 0 && valor <= rs.getDouble("saldo")) {
+
 				cliente.setCodCliente(rs.getInt("codCliente"));
 				cliente.setSaldo(rs.getDouble("saldo"));
 
@@ -272,11 +270,11 @@ public class ClienteDaoJDBC implements ClienteDao {
 				st2.executeUpdate();
 				System.out.println("SAQUE realizado COM SUCESSO!");
 
-
 			} else {
-				System.out.println("Códido do cliente não encontrado. Ou valor informado para Saque inválido ou maior que saldo do correntista!");
+				System.out.println(
+						"Códido do cliente não encontrado. Ou valor informado para Saque inválido ou maior que saldo do correntista!");
 
-			}		
+			}
 
 		}
 
@@ -291,6 +289,79 @@ public class ClienteDaoJDBC implements ClienteDao {
 		}
 
 	}
-	
+
+	@Override
+	public void updateTransferencia(Integer codCliente, Integer codClienteFavorecido, double valor) {
+
+		PreparedStatement st1 = null;
+		PreparedStatement st2 = null;
+		PreparedStatement st3 = null;
+		PreparedStatement st4 = null;
+
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+
+		try {
+
+			st1 = conectar.prepareStatement(
+
+					"SELECT codCliente, saldo " + "FROM cliente " + "WHERE cliente.codCliente =?");
+
+			st1.setInt(1, codClienteFavorecido);
+			rs1 = st1.executeQuery();
+			Cliente clienteFavorecido = new Cliente();
+
+			st2 = conectar.prepareStatement(
+
+					"SELECT codCliente, saldo " + "FROM cliente " + "WHERE cliente.codCliente =?");
+
+			st2.setInt(1, codCliente);
+			rs2 = st2.executeQuery();
+			Cliente clienteDeposita = new Cliente();
+
+			if (rs1.next() && valor >= 0 && rs2.next() && valor <= rs2.getDouble("saldo")) {
+
+				clienteFavorecido.setCodCliente(rs1.getInt("codCliente"));
+				clienteFavorecido.setSaldo(rs1.getDouble("saldo"));
+
+				st3 = conectar.prepareStatement("UPDATE cliente " + "SET saldo=? " + "WHERE codCliente = ?");
+
+				st3.setDouble(1, (clienteFavorecido.getSaldo() + valor));
+				st3.setInt(2, clienteFavorecido.getCodCliente());
+				st3.executeUpdate();
+
+				clienteDeposita.setCodCliente(rs2.getInt("codCliente"));
+				clienteDeposita.setSaldo(rs2.getDouble("saldo"));
+
+				st4 = conectar.prepareStatement("UPDATE cliente " + "SET saldo=? " + "WHERE codCliente = ?");
+
+				st4.setDouble(1, (clienteDeposita.getSaldo() - valor));
+				st4.setInt(2, clienteDeposita.getCodCliente());
+				st4.executeUpdate();
+				System.out.println("TRANSFERÊNCIA realizada COM SUCESSO!");
+				
+
+			} else {
+				System.out.println(
+						"Códido do cliente não encontrado. Ou valor informado para Saque inválido ou maior que saldo do correntista!");
+
+			}
+
+		}
+
+		catch (SQLException erro) {
+
+			throw new DbException(erro.getMessage());
+
+		} finally {
+			DB.closeStatement(st1);
+			DB.closeStatement(st2);
+			DB.closeStatement(st3);
+			DB.closeStatement(st4);
+			DB.closeResultSet(rs1);
+			DB.closeResultSet(rs2);
+		}
+
+	}
 
 }

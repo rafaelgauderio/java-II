@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -67,6 +68,16 @@ public class Saque extends JFrame {
 		textFieldSaque.setBounds(210, 80, 197, 20);
 		contentPane.add(textFieldSaque);
 		textFieldSaque.setColumns(10);
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(frame,
+				        "SAQUE REALIZADO COM SUCESSO", 
+				        "SAQUE", // 
+				        JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+		});
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnConfirmar.setBounds(120, 143, 179, 41);
 		contentPane.add(btnConfirmar);

@@ -1,19 +1,18 @@
 package view.operacoes;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class Transferencia extends JFrame {
 
@@ -77,6 +76,13 @@ public class Transferencia extends JFrame {
 		textFieldValorTransf.setColumns(10);
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(frame,
+				        "TRANSFERÊNCIA REALIZADA COM SUCESSO", //mensagem
+				        "TRANSFERÊNCIA", // titulo da janela 
+				        JOptionPane.INFORMATION_MESSAGE);
+				
+				
 			}
 		});
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 14));
