@@ -75,12 +75,8 @@ public class Transferencia extends JFrame {
 		contentPane.add(textFieldValorTransf);
 		textFieldValorTransf.setColumns(10);
 		btnConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				JOptionPane.showMessageDialog(frame,
-				        "TRANSFERÊNCIA REALIZADA COM SUCESSO", //mensagem
-				        "TRANSFERÊNCIA", // titulo da janela 
-				        JOptionPane.INFORMATION_MESSAGE);
+			public void actionPerformed(ActionEvent e) {				
+			
 				
 				
 			}

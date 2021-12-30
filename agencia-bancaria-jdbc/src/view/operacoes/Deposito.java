@@ -73,11 +73,7 @@ public class Deposito extends JFrame {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				JOptionPane.showMessageDialog(frame,
-				        "DEPOSITO REALIZADO COM SUCESSO", 
-				        "DEPOSITO", // 
-				        JOptionPane.INFORMATION_MESSAGE);
-				
+						
 				
 			}
 		});

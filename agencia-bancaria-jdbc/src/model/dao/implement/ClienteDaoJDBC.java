@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import database.DB;
 import database.DbException;
 import model.Cliente;
@@ -16,6 +19,7 @@ import model.dao.ClienteDao;
 public class ClienteDaoJDBC implements ClienteDao {
 
 	private Connection conectar;
+	public JFrame frame = new JFrame();
 
 	public ClienteDaoJDBC(Connection conn) {
 		this.conectar = conn;
@@ -41,11 +45,22 @@ public class ClienteDaoJDBC implements ClienteDao {
 				if (rs.next()) {
 					int id = rs.getInt(1);
 					cliente.setCodCliente(id);
+					frame.setBounds(100, 100, 600, 400);
+					JOptionPane.showMessageDialog(frame, "CADASTRO REALIZADO COM SUCESSO", "CLIENTE NOVO", //
+							JOptionPane.INFORMATION_MESSAGE);
+
+					System.out.println("Cadastro realizado COM SUCESSO!");
+
 				}
 				DB.closeResultSet(rs);
 			} else {
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame, "CADASTRO NÃO REALIZADO. ERRO!", "CLIENTE NOVO", //
+						JOptionPane.ERROR_MESSAGE);
+
 				throw new DbException("Erro. Nenhum linha for inserida");
 			}
+
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
 		} finally {
@@ -69,9 +84,19 @@ public class ClienteDaoJDBC implements ClienteDao {
 			st.setDate(4, new java.sql.Date(cliente.getDataNascimento().getDate()));
 			st.setDouble(5, cliente.getSaldo());
 			st.setInt(6, cliente.getCodCliente());
+			int executeUpdate = st.executeUpdate();
 
-			st.executeUpdate();
-			System.out.println("Dados do Cliente ATUALIZADOS COM SUCESSO!");
+			if (executeUpdate == 1) {
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame, "ATUALIZAÇÃO REALIZADA COM SUCESSO", "UPDATE", //
+						JOptionPane.INFORMATION_MESSAGE);
+				System.out.println("Dados do Cliente ATUALIZADOS COM SUCESSO!");
+			} else {
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame, "ERRO AO TENTAR ATUALIZAR", "UPDATE", //
+						JOptionPane.ERROR_MESSAGE);
+				System.out.println("Erro ao ATUALIZAR dados do Cliente");
+			}
 
 		} catch (SQLException erro) {
 
@@ -95,11 +120,16 @@ public class ClienteDaoJDBC implements ClienteDao {
 			int linhasDeletadas = st.executeUpdate();
 
 			if (linhasDeletadas == 0) {
-
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame, "ERRO. EXCLUSÃO NÃO REALIZADA!", "DELETE",
+						JOptionPane.ERROR_MESSAGE);
 				System.out.println(
 						"O código do cliente informado NÃO EXISTE. Nenhum dado foi alterado. EXCLUSÃO NÃO REALIZADA!");
 
 			} else {
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame, "DADOS EXCLUIDOS COM SUCESSO", "DELETE", //
+						JOptionPane.INFORMATION_MESSAGE);
 				System.out.println("Dados EXCLUIDOS com sucesso");
 			}
 
@@ -139,6 +169,10 @@ public class ClienteDaoJDBC implements ClienteDao {
 				return cliente;
 
 			} else {
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame, "CLIENTE NÃO ENCONTRADO. INFORME OUTRO CODIGO!",
+						"BUSCA POR CLIENTE", //
+						JOptionPane.ERROR_MESSAGE);
 				System.out.println("Códido do cliente não encontrado.");
 
 			}
@@ -210,7 +244,7 @@ public class ClienteDaoJDBC implements ClienteDao {
 			rs = st1.executeQuery();
 			Cliente cliente = new Cliente();
 
-			if (rs.next() && valor >= 0) {
+			if (rs.next() && valor > 0) {
 
 				cliente.setCodCliente(rs.getInt("codCliente"));
 				cliente.setSaldo(rs.getDouble("saldo"));
@@ -220,9 +254,16 @@ public class ClienteDaoJDBC implements ClienteDao {
 				st2.setDouble(1, (cliente.getSaldo() + valor));
 				st2.setInt(2, cliente.getCodCliente());
 				st2.executeUpdate();
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame, "DEPOSITO realizado COM SUCESSO!", "DEPÓSITO",
+						JOptionPane.INFORMATION_MESSAGE);
 				System.out.println("DEPOSITO realizado COM SUCESSO!");
 
 			} else {
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame,
+						"DEPOSITO NÃO REALIZADO! codigo do cliente não encontrado ou valor inválido!", "DEPÓSITO",
+						JOptionPane.ERROR_MESSAGE);
 				System.out.println("Códido do cliente não encontrado. Ou valor informado de depósito inválido!");
 
 			}
@@ -258,7 +299,7 @@ public class ClienteDaoJDBC implements ClienteDao {
 			rs = st1.executeQuery();
 			Cliente cliente = new Cliente();
 
-			if (rs.next() && valor >= 0 && valor <= rs.getDouble("saldo")) {
+			if (rs.next() && valor > 0 && valor <= rs.getDouble("saldo")) {
 
 				cliente.setCodCliente(rs.getInt("codCliente"));
 				cliente.setSaldo(rs.getDouble("saldo"));
@@ -268,9 +309,16 @@ public class ClienteDaoJDBC implements ClienteDao {
 				st2.setDouble(1, (cliente.getSaldo() - valor));
 				st2.setInt(2, cliente.getCodCliente());
 				st2.executeUpdate();
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame, "SAQUE realizado COM SUCESSO!", "SAQUE",
+						JOptionPane.INFORMATION_MESSAGE);
 				System.out.println("SAQUE realizado COM SUCESSO!");
 
 			} else {
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame,
+						"SAQUE NÃO REALIZADO! Códido do cliente não encontrado. Ou valor informado para Saque inválido ou maior que saldo do correntista!",
+						"SAQUE", JOptionPane.ERROR_MESSAGE);
 				System.out.println(
 						"Códido do cliente não encontrado. Ou valor informado para Saque inválido ou maior que saldo do correntista!");
 
@@ -319,7 +367,7 @@ public class ClienteDaoJDBC implements ClienteDao {
 			rs2 = st2.executeQuery();
 			Cliente clienteDeposita = new Cliente();
 
-			if (rs1.next() && valor >= 0 && rs2.next() && valor <= rs2.getDouble("saldo")) {
+			if (rs1.next() && valor > 0 && rs2.next() && valor <= rs2.getDouble("saldo")) {
 
 				clienteFavorecido.setCodCliente(rs1.getInt("codCliente"));
 				clienteFavorecido.setSaldo(rs1.getDouble("saldo"));
@@ -338,12 +386,21 @@ public class ClienteDaoJDBC implements ClienteDao {
 				st4.setDouble(1, (clienteDeposita.getSaldo() - valor));
 				st4.setInt(2, clienteDeposita.getCodCliente());
 				st4.executeUpdate();
+
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame, "TRANSFERÊNCIA REALIZADA COM SUCESSO", "TRANSFERÊNCIA", //
+						JOptionPane.INFORMATION_MESSAGE);
+
 				System.out.println("TRANSFERÊNCIA realizada COM SUCESSO!");
-				
 
 			} else {
+				frame.setBounds(100, 100, 600, 400);
+				JOptionPane.showMessageDialog(frame,
+						"TRANSFERÊNCIA NÃO REALIZADA. Códigos dos clientes inexistentes, valor inválido ou saldo insuficiente!",
+						"TRANSFERÊNCIA", //
+						JOptionPane.ERROR_MESSAGE);
 				System.out.println(
-						"Códido do cliente não encontrado. Ou valor informado para Saque inválido ou maior que saldo do correntista!");
+						"Transferência NÃO REALIZADA. Códigos dos clientes inexistentes, valor inválido ou saldo insuficiente!");
 
 			}
 

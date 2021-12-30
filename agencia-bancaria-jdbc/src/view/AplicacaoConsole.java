@@ -19,7 +19,7 @@ public class AplicacaoConsole {
 		SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
 		java.sql.Date date = new java.sql.Date(sdf.parse("05/12/1995").getTime());
 		java.sql.Date date2 = new java.sql.Date(sdf.parse("08/01/1987").getTime());
-		
+		/*
 		System.out.println("\nTESTANDO INSERT");
 		Cliente clienteNovo = new Cliente(null,"Mariana De Luca ","Rua Sertorio 35, Apto: 25","F",date,3800.50);
 		Cliente clienteNovo2 = new Cliente(null,"Rafael De Luca ","Rua Brasil 28","M",date,3500.50);
@@ -30,17 +30,22 @@ public class AplicacaoConsole {
 		clienteDao.insert(clienteNovo2);
 		clienteDao.insert(clienteNovo3);
 		clienteDao.insert(clienteNovo4);
-		clienteDao.insert(clienteNovo5);		
+		clienteDao.insert(clienteNovo5);
+		
+		
 		System.out.println("CLIENTE INSERIDO COM SUCESSO. Codigo do cliente novo: " + clienteNovo.getCodCliente());
 		System.out.println("CLIENTE INSERIDO COM SUCESSO. Codigo do cliente novo: " + clienteNovo2.getCodCliente());
 		System.out.println("CLIENTE INSERIDO COM SUCESSO. Codigo do cliente novo: " + clienteNovo3.getCodCliente());
 		System.out.println("CLIENTE INSERIDO COM SUCESSO. Codigo do cliente novo: " + clienteNovo4.getCodCliente());
 		System.out.println("CLIENTE INSERIDO COM SUCESSO. Codigo do cliente novo: " + clienteNovo5.getCodCliente());
 		
-			
+		
 		System.out.println("\nTESTANDO O PROCURAR POR CODIGO DO CLIENTE");
 		Cliente cliente = clienteDao.searchByCod(3);
+		cliente = clienteDao.searchByCod(75);
 		System.out.println(cliente);
+		
+		
 		
 		System.out.println("\nTESTANDO SEARCHALLCLIENTS");
 		List<Cliente> lista = new ArrayList<Cliente>();
@@ -50,39 +55,41 @@ public class AplicacaoConsole {
 			
 		}	
 		
-		
+		/*
 		System.out.println("\nTESTANDO UPDATE");
-		Cliente clienteUpdate = clienteDao.searchByCod(4);
-		clienteUpdate.setNome("Juliana da Silva");
+		Cliente clienteUpdate = clienteDao.searchByCod(65);
+		clienteUpdate.setNome("Claudia da Silva");
 		clienteUpdate.setEndereco("Rua nova lima 50");
 		clienteUpdate.setSexo("F");
+		clienteUpdate.setSaldo(8500.00);
 		java.sql.Date dateUpdate = new java.sql.Date(sdf.parse("17/08/1995").getDate());
 		clienteUpdate.setDataNascimento(dateUpdate);
 		clienteDao.update(clienteUpdate);
 		
 		
 		System.out.println("\nTESTANDO DELETE");
-		System.out.println("Excluindo id = 15" );
-		clienteDao.deleteByCod(2);
-		System.out.println("Excluindo um id que não tem no database");
+		System.out.println("Excluindo id = 65" );
+		clienteDao.deleteByCod(65);		
 		clienteDao.deleteByCod(356);
 		
+		
+		*/
 		System.out.println("\nTESTANDO DEPOSITO");
-		clienteDao.updateDeposito(1,5000);
-		clienteDao.updateDeposito(2,4000);
+		clienteDao.updateDeposito(90,5000);
+		clienteDao.updateDeposito(91,0);
 		clienteDao.updateDeposito(4,6000.50);
 		
 		
 		
 		System.out.println("\nTESTANDO SAQUE");
-		clienteDao.updateSaque(1,25000);
-		clienteDao.updateSaque(2,3000);
+		clienteDao.updateSaque(65,25000);
+		clienteDao.updateSaque(66,2700);
 		clienteDao.updateSaque(3,-800);
 		clienteDao.updateSaque(700,2500);		
 		
 		
 		System.out.println("\nTESTANDO TRANSFERÊNCIA");
-		clienteDao.updateTransferencia(61, 62, 49);
+		clienteDao.updateTransferencia(61, 62, 2);
 		clienteDao.updateTransferencia(500, 62, 600);
 		clienteDao.updateTransferencia(61, 62, -800);
 		
