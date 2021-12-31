@@ -121,7 +121,7 @@ public class ClienteDaoJDBC implements ClienteDao {
 
 			if (linhasDeletadas == 0) {
 				frame.setBounds(100, 100, 600, 400);
-				JOptionPane.showMessageDialog(frame, "ERRO. EXCLUSÃO NÃO REALIZADA!", "DELETE",
+				JOptionPane.showMessageDialog(frame, "ERRO.O código do cliente informado NÃO EXISTE. EXCLUSÃO NÃO REALIZADA! ", "DELETE",
 						JOptionPane.ERROR_MESSAGE);
 				System.out.println(
 						"O código do cliente informado NÃO EXISTE. Nenhum dado foi alterado. EXCLUSÃO NÃO REALIZADA!");

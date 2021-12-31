@@ -86,8 +86,8 @@ public class Novo extends JFrame {
 		comboBox.addItem("F");
 		comboBox.setSelectedItem("--SELECIONE--");
 		//System.out.println(comboBox.getSelectedItem());
-		String sexo = String.valueOf(comboBox.getSelectedItem());
-		System.out.println(sexo);
+		//String sexo = String.valueOf(comboBox.getSelectedItem());
+		//System.out.println(sexo);
 		
 		
 		
