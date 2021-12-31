@@ -120,8 +120,8 @@ public class Cliente implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cliente [codCliente=" + codCliente + ", nome=" + nome + ", endereco=" + endereco + ", sexo=" + sexo
-				+ ", dataNascimento=" + dataNascimento + ", saldo=" + String.format("R$ %.2f", saldo)+ "]";
+		return "codCliente=" + codCliente + ", nome=" + nome + ", endereco=" + endereco + ", sexo=" + sexo
+				+ ", dataNascimento=" + dataNascimento + ", saldo=" + String.format("R$ %.2f", saldo)+ "]\n";
 	}
 	
 	public String toStringIndividual() {

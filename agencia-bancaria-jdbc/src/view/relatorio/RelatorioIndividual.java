@@ -26,8 +26,7 @@ public class RelatorioIndividual extends JFrame {
 	public JFrame frame;
 	private JPanel contentPane;
 	private JTextField textFieldCodigoCliente;
-	private JTextArea textAreaRelIndividual;
-	private JScrollPane pane = new JScrollPane();
+	private JTextArea textAreaRelIndividual;	
 	private JScrollPane scrollPane;
 	
 	/**
