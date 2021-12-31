@@ -99,12 +99,14 @@ public class Deletar extends JFrame {
 						return;
 					} else {
 						int botaoDialogo = JOptionPane.YES_NO_OPTION;
-						int resposta = JOptionPane.showConfirmDialog(null, "Cliente encontrado no database. Tem certeza deseja EXCLUIR?", "AVISO",
+						int resposta = JOptionPane.showConfirmDialog(null, "Cliente encontrado no database. Tem certeza que deseja EXCLUIR?", "AVISO",
 								botaoDialogo);
 
 						if (resposta == JOptionPane.NO_OPTION) {
-							System.out.println("Dados não alterados");
+							JOptionPane.showMessageDialog(null,
+									"Nenhum dado foi alterado. Exclusão cancelada!","DELETAR",JOptionPane.INFORMATION_MESSAGE);
 						} else if (resposta == JOptionPane.YES_OPTION) {
+														
 							clienteDao.deleteByCod(Integer.parseInt(textFieldCodigoCliente.getText()));
 
 						}
