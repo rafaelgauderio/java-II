@@ -19,6 +19,7 @@ import view.operacoes.Saque;
 import view.operacoes.Transferencia;
 import view.relatorio.RelatorioGeral;
 import view.relatorio.RelatorioIndividual;
+import java.awt.Font;
 
 public class Aplicacao {
 
@@ -50,13 +51,14 @@ public class Aplicacao {
 	private void initialize() {
 
 		frame = new JFrame();
-		frame.setBounds(450, 100, 600, 400);
+		frame.setBounds(450, 100, 650, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JMenuBar menu = new JMenuBar();
 
 		JMenu arquivo = new JMenu("Arquivo");
+		arquivo.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		arquivo.setMnemonic('A');
 
 		JMenuItem itemSair = new JMenuItem(new SairAction());
@@ -64,6 +66,7 @@ public class Aplicacao {
 		itemSair.setMnemonic('S');
 
 		JMenu cadastro = new JMenu("Cadastro");
+		cadastro.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		cadastro.setMnemonic('C');
 
 		JMenu cliente = new JMenu();
@@ -117,6 +120,7 @@ public class Aplicacao {
 		cliente.add(deletar);
 
 		JMenu operacoes = new JMenu("Operações");
+		operacoes.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		operacoes.setMnemonic('O');
 
 		JMenuItem deposito = new JMenuItem("Depósito");
@@ -160,6 +164,7 @@ public class Aplicacao {
 		operacoes.add(transferencia);
 
 		JMenu relatorio = new JMenu("Relatório");
+		relatorio.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		relatorio.setMnemonic('R');
 
 		JMenuItem relatorioIndividual = new JMenuItem("Um cliente");
@@ -192,6 +197,7 @@ public class Aplicacao {
 		relatorio.add(relatorioTodosClientes);
 
 		JMenu ajuda = new JMenu("Ajuda");
+		ajuda.setFont(new Font("Segoe UI", Font.BOLD, 15));
 
 		JMenuItem itemSobre = new JMenuItem(new SobreAction());
 		itemSobre.setText("Sobre");

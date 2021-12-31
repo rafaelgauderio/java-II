@@ -91,12 +91,26 @@ public class Deletar extends JFrame {
 				if (textFieldCodigoCliente.getText().isEmpty() || textFieldCodigoCliente.getText().isBlank()) {
 					JOptionPane.showMessageDialog(null,
 							"Favor informar o código do cliente que desejas EXCLUIR".toUpperCase());
-				}
-
-				else {
+				} else {
 					ClienteDao clienteDao = DaoFactory.criarClienteDao();
-					Integer codigoCliente = Integer.parseInt(textFieldCodigoCliente.getText());
-					clienteDao.deleteByCod(codigoCliente);
+					Cliente cliente = clienteDao.searchByCod(Integer.parseInt(textFieldCodigoCliente.getText()));
+
+					if (cliente == null) {
+						return;
+					} else {
+						int botaoDialogo = JOptionPane.YES_NO_OPTION;
+						int resposta = JOptionPane.showConfirmDialog(null, "Cliente encontrado no database. Tem certeza deseja EXCLUIR?", "AVISO",
+								botaoDialogo);
+
+						if (resposta == JOptionPane.NO_OPTION) {
+							System.out.println("Dados não alterados");
+						} else if (resposta == JOptionPane.YES_OPTION) {
+							clienteDao.deleteByCod(Integer.parseInt(textFieldCodigoCliente.getText()));
+
+						}
+
+					}
+
 				}
 
 			}
