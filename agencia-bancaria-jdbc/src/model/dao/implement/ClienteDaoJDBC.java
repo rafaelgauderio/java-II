@@ -68,7 +68,7 @@ public class ClienteDaoJDBC implements ClienteDao {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public void update(Cliente cliente) {
 
@@ -81,7 +81,7 @@ public class ClienteDaoJDBC implements ClienteDao {
 			st.setString(1, cliente.getNome());
 			st.setString(2, cliente.getEndereco());
 			st.setString(3, cliente.getSexo());
-			st.setDate(4, new java.sql.Date(cliente.getDataNascimento().getDate()));
+			st.setDate(4, new java.sql.Date(cliente.getDataNascimento().getTime()));
 			st.setDouble(5, cliente.getSaldo());
 			st.setInt(6, cliente.getCodCliente());
 			int executeUpdate = st.executeUpdate();
