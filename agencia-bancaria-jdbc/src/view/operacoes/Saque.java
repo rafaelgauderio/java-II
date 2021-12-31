@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import model.dao.ClienteDao;
+import model.dao.DaoFactory;
+
 public class Saque extends JFrame {
 
 	public JFrame frame;
@@ -71,10 +74,16 @@ public class Saque extends JFrame {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				JOptionPane.showMessageDialog(frame,
-				        "SAQUE REALIZADO COM SUCESSO", 
-				        "SAQUE", // 
-				        JOptionPane.INFORMATION_MESSAGE);
+				if (textFieldCodigoCliente.getText().isEmpty() || textFieldSaque.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null,
+							"Informe o código do cliente e um valor maior que saldo da conta do depositário para Saque".toUpperCase(),"AVISO",JOptionPane.WARNING_MESSAGE);
+				} else {
+					Integer codigoCliente = Integer.parseInt(textFieldCodigoCliente.getText());
+					Double valor = Double.parseDouble(textFieldSaque.getText());
+					ClienteDao clienteDao = DaoFactory.criarClienteDao();
+					clienteDao.updateSaque(codigoCliente, valor);
+
+				}
 				
 			}
 		});

@@ -77,7 +77,7 @@ public class Deposito extends JFrame {
 
 				if (textFieldCodigoCliente.getText().isEmpty() || textFieldDeposito.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null,
-							"Informe o código do cliente e um valor" + " maior que zero para depósito".toUpperCase());
+							"Informe o código do cliente e um valor maior que zero para depósito".toUpperCase(),"AVISO",JOptionPane.WARNING_MESSAGE);
 				} else {
 					Integer codigoCliente = Integer.parseInt(textFieldCodigoCliente.getText());
 					Double valor = Double.parseDouble(textFieldDeposito.getText());
