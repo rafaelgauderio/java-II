@@ -5,14 +5,21 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import model.Cliente;
+import model.dao.ClienteDao;
+import model.dao.DaoFactory;
 
 public class Novo extends JFrame {
 	
@@ -20,11 +27,12 @@ public class Novo extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public JFrame frame;
 	private JPanel contentPane;
-	private JTextField textFieldCodigoCliente;
+	private JTextField textFieldNome;
 	private JTextField textFieldDataNascimento;
 	private JTextField textFieldEndereco;
-	private JTextField textField;
-	private final JButton btnSalvar = new JButton("Salvar");
+	private JTextField textFieldSaldo;
+	private JButton btnSalvar = new JButton("Salvar");
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Launch the application.
@@ -57,8 +65,8 @@ public class Novo extends JFrame {
 		contentPane.setLayout(null);
 		frame.setContentPane(contentPane);
 		
-		JLabel lblNome = new JLabel("C\u00F3d. Cliente");
-		lblNome.setBounds(74, 27, 117, 35);
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setBounds(143, 27, 117, 35);
 		lblNome.setFont(new Font("Verdana", Font.BOLD, 14));
 		lblNome.setBackground(Color.BLACK);
 		contentPane.add(lblNome);
@@ -69,7 +77,7 @@ public class Novo extends JFrame {
 		lblDataDeNascimento.setBackground(Color.BLACK);
 		contentPane.add(lblDataDeNascimento);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox = new JComboBox<String>();
 		comboBox.setBounds(210, 132, 117, 22);
 		comboBox.setEditable(true);
 		contentPane.add(comboBox);
@@ -101,11 +109,11 @@ public class Novo extends JFrame {
 		lblSaldo.setBounds(337, 211, 88, 35);
 		contentPane.add(lblSaldo);
 		
-		textFieldCodigoCliente = new JTextField();
-		textFieldCodigoCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textFieldCodigoCliente.setBounds(210, 34, 180, 20);
-		contentPane.add(textFieldCodigoCliente);
-		textFieldCodigoCliente.setColumns(10);
+		textFieldNome = new JTextField();
+		textFieldNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textFieldNome.setBounds(210, 34, 180, 20);
+		contentPane.add(textFieldNome);
+		textFieldNome.setColumns(10);
 		
 		textFieldDataNascimento = new JTextField();
 		textFieldDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -119,13 +127,53 @@ public class Novo extends JFrame {
 		textFieldEndereco.setBounds(210, 177, 366, 20);
 		contentPane.add(textFieldEndereco);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textField.setColumns(10);
-		textField.setBounds(408, 218, 168, 20);
-		contentPane.add(textField);
+		textFieldSaldo = new JTextField();
+		textFieldSaldo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textFieldSaldo.setColumns(10);
+		textFieldSaldo.setBounds(408, 218, 168, 20);
+		contentPane.add(textFieldSaldo);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if(textFieldNome.getText().isEmpty() || textFieldEndereco.getText().isEmpty() || 
+						String.valueOf(comboBox.getSelectedItem()).isEmpty()	||	comboBox.getSelectedIndex()==0) {
+					JOptionPane.showMessageDialog(null, "Apenas o campo Saldo é de preenchimento opcional. Favor preencher todos os demais campos".toUpperCase());	
+				}
+				
+				else {
+					ClienteDao clienteDao = DaoFactory.criarClienteDao();
+					
+					String nome = textFieldNome.getText();
+					String sexo = String.valueOf(comboBox.getSelectedItem());
+					String endereco = textFieldEndereco.getText();
+					
+					Double saldo = 0.0;
+					if(textFieldSaldo.getText().isEmpty()) {
+						saldo=0.0;
+						
+					} else {
+						saldo = Double.parseDouble(textFieldSaldo.getText());
+					}									
+					
+					
+					
+					SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");				
+					//SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");			
+					java.sql.Date dataNascimento = null;
+					try {
+						dataNascimento = new java.sql.Date(formatoData.parse(textFieldDataNascimento.getText()).getTime());
+					} catch (ParseException e1) {
+						
+						e1.printStackTrace();
+					}
+					
+					Cliente clienteNovo = new Cliente(null,nome,endereco,sexo,dataNascimento,saldo);
+					clienteDao.insert(clienteNovo);
+				}
+				
+								
+				
+				
 			}
 		});
 		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 14));

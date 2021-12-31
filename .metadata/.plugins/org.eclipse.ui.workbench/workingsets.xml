@@ -25,4 +25,5 @@
 <item elementID="=mavemJpa/src\/test\/resources" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1638740692314_2" label="Window Working Set" name="Aggregate for window 1638452038193"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1640388142978_3" label="Window Working Set" name="Aggregate for window 1640388142978"/>
 </workingSetManager>
