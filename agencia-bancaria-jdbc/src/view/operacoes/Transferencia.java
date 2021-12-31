@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import model.dao.ClienteDao;
+import model.dao.DaoFactory;
+
 public class Transferencia extends JFrame {
 
 		
@@ -77,7 +80,18 @@ public class Transferencia extends JFrame {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 			
-				
+				if (textFieldCodigoCliente.getText().isEmpty() || textFieldClienteReceb.getText().isEmpty() ||
+					textFieldValorTransf.getText().isEmpty()	) {
+					JOptionPane.showMessageDialog(null,
+							"Informe o código do cliente depositario, um codigo de cliente favorecido e um valor maior que saldo da conta do depositário!".toUpperCase(),"AVISO",JOptionPane.WARNING_MESSAGE);
+				} else {
+					Integer codigoCliente = Integer.parseInt(textFieldCodigoCliente.getText());
+					Integer codigoClienteFavorecido = Integer.parseInt(textFieldClienteReceb.getText());
+					Double valorTransferencia = Double.parseDouble(textFieldValorTransf.getText());
+					ClienteDao clienteDao = DaoFactory.criarClienteDao();
+					clienteDao.updateTransferencia(codigoCliente, codigoClienteFavorecido, valorTransferencia);
+
+				}				
 				
 			}
 		});
