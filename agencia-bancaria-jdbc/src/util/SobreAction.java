@@ -15,8 +15,7 @@ public class SobreAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		
 		JOptionPane.setDefaultLocale(null);
-		JOptionPane.showMessageDialog(null, "Desenvolvido por Rafael De Luca\nIFRS - Canoas\nAnalise"
-				+ " e Desenvolvimento de Sistemas\n2021");
+		JOptionPane.showMessageDialog(null, "Desenvolvido por Rafael De Luca\nIFRS - Canoas\nAnalise e Desenvolvimento de Sistemas\n2021".toUpperCase(),"AJUDA",JOptionPane.INFORMATION_MESSAGE);
 		
 		
 	}

@@ -124,6 +124,11 @@ public class Cliente implements Serializable {
 				+ ", dataNascimento=" + dataNascimento + ", saldo=" + String.format("R$ %.2f", saldo)+ "]";
 	}
 	
+	public String toStringIndividual() {
+		return " Cliente [codCliente=" + codCliente + ", nome=" + nome + ", endereco=" + endereco + "\nsexo=" + sexo
+				+ ", dataNascimento=" + dataNascimento + ", saldo=" + String.format("R$ %.2f", saldo)+ "]\n\n";
+	}
+	
 	
 	
 	
