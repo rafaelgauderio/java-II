@@ -322,6 +322,9 @@ public class ClienteDaoJDBC implements ClienteDao {
 				JOptionPane.showMessageDialog(frame, "SAQUE realizado COM SUCESSO!", "SAQUE",
 						JOptionPane.INFORMATION_MESSAGE);
 				System.out.println("SAQUE realizado COM SUCESSO!");
+				
+				MovimentoDao movimentoDao = DaoFactory.criarMovimentoDao();
+				movimentoDao.insertSaqueMovimento(cliente.getCodCliente(),2,valor);
 
 			} else {
 				frame.setBounds(100, 100, 600, 400);

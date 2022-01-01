@@ -97,7 +97,8 @@ public class AplicacaoConsole {
 		*/
 		
 		MovimentoDao movimentoDao = DaoFactory.criarMovimentoDao();
-		movimentoDao.insertDepositoMovimento(103,1,788.50);
+		movimentoDao.insertDepositoMovimento(111,1,788.50);
+		movimentoDao.insertSaqueMovimento(103,2,2499);
 		
 		
 		
