@@ -99,8 +99,8 @@ public class AplicacaoConsole {
 		MovimentoDao movimentoDao = DaoFactory.criarMovimentoDao();
 		movimentoDao.insertDepositoMovimento(111,1,788.50);
 		movimentoDao.insertSaqueMovimento(103,2,2499);
-		
-		
+		movimentoDao.insertTranfereciaMovimento(111, 103,3, 1.20);
+				
 		
 		/*
 		//testando conexão

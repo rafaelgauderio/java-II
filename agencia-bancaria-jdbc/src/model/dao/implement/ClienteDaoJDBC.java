@@ -404,6 +404,9 @@ public class ClienteDaoJDBC implements ClienteDao {
 						JOptionPane.INFORMATION_MESSAGE);
 
 				System.out.println("TRANSFERÊNCIA realizada COM SUCESSO!");
+				
+				MovimentoDao movimentoDao = DaoFactory.criarMovimentoDao();
+				movimentoDao.insertTranfereciaMovimento(clienteDeposita.getCodCliente(), clienteFavorecido.getCodCliente(), 3, valor);
 
 			} else {
 				frame.setBounds(100, 100, 600, 400);
