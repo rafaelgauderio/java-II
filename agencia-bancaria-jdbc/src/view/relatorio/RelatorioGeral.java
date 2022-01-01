@@ -71,7 +71,7 @@ public class RelatorioGeral extends JFrame {
 		frame.setContentPane(panelClientes);
 		
 		JButton btnFechar = new JButton("Fechar");
-		btnFechar.setBounds(521, 311, 112, 41);
+		btnFechar.setBounds(521, 411, 112, 41);
 		btnFechar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

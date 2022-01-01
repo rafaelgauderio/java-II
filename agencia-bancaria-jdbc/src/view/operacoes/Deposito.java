@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import model.dao.ClienteDao;
 import model.dao.DaoFactory;
+import model.dao.MovimentoDao;
 
 public class Deposito extends JFrame {
 
@@ -82,7 +83,7 @@ public class Deposito extends JFrame {
 					Integer codigoCliente = Integer.parseInt(textFieldCodigoCliente.getText());
 					Double valor = Double.parseDouble(textFieldDeposito.getText());
 					ClienteDao clienteDao = DaoFactory.criarClienteDao();
-					clienteDao.updateDeposito(codigoCliente, valor);
+					clienteDao.updateDeposito(codigoCliente, valor);				
 
 				}
 

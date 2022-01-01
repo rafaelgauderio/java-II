@@ -8,6 +8,7 @@ import java.util.List;
 import model.Cliente;
 import model.dao.ClienteDao;
 import model.dao.DaoFactory;
+import model.dao.MovimentoDao;
 
 public class AplicacaoConsole {
 	
@@ -73,7 +74,7 @@ public class AplicacaoConsole {
 		clienteDao.deleteByCod(356);
 		
 		
-		*/
+		
 		System.out.println("\nTESTANDO DEPOSITO");
 		clienteDao.updateDeposito(90,5000);
 		clienteDao.updateDeposito(91,0);
@@ -92,6 +93,12 @@ public class AplicacaoConsole {
 		clienteDao.updateTransferencia(61, 62, 2);
 		clienteDao.updateTransferencia(500, 62, 600);
 		clienteDao.updateTransferencia(61, 62, -800);
+		
+		*/
+		
+		MovimentoDao movimentoDao = DaoFactory.criarMovimentoDao();
+		movimentoDao.insertDepositoMovimento(103,1,788.50);
+		
 		
 		
 		/*

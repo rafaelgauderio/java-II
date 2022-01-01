@@ -100,6 +100,7 @@ public class RelatorioIndividual extends JFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textAreaRelIndividual.setText("");
 				if (textFieldCodigoCliente.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Informe um código de cliente".toUpperCase(), "AVISO",
 							JOptionPane.WARNING_MESSAGE);

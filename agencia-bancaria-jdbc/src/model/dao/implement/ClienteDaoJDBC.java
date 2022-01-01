@@ -15,6 +15,8 @@ import database.DB;
 import database.DbException;
 import model.Cliente;
 import model.dao.ClienteDao;
+import model.dao.DaoFactory;
+import model.dao.MovimentoDao;
 
 public class ClienteDaoJDBC implements ClienteDao {
 
@@ -255,9 +257,16 @@ public class ClienteDaoJDBC implements ClienteDao {
 				st2.setInt(2, cliente.getCodCliente());
 				st2.executeUpdate();
 				frame.setBounds(100, 100, 600, 400);
+				
+							
 				JOptionPane.showMessageDialog(frame, "DEPOSITO realizado COM SUCESSO!", "DEPÓSITO",
 						JOptionPane.INFORMATION_MESSAGE);
 				System.out.println("DEPOSITO realizado COM SUCESSO!");
+				
+				MovimentoDao movimentoDao = DaoFactory.criarMovimentoDao();
+				movimentoDao.insertDepositoMovimento(cliente.getCodCliente(),1,valor);
+				
+				
 
 			} else {
 				frame.setBounds(100, 100, 600, 400);
