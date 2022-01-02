@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,7 +29,7 @@ public class Atualizar extends JFrame {
 	public JFrame frame;
 	private JPanel contentPane;
 	private JTextField textFieldNome;
-	private JTextField textFieldDataNascimento;
+	private JFormattedTextField ftextFieldDataNascimento;
 	private JTextField textFieldEndereco;
 	private JTextField textFieldSaldo;
 	private JTextField textFieldCodigoCliente;
@@ -115,13 +116,20 @@ public class Atualizar extends JFrame {
 		textFieldNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textFieldNome.setBounds(210, 80, 366, 20);
 		contentPane.add(textFieldNome);
-		textFieldNome.setColumns(10);
-
-		textFieldDataNascimento = new JTextField();
-		textFieldDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textFieldDataNascimento.setColumns(10);
-		textFieldDataNascimento.setBounds(210, 123, 366, 20);
-		contentPane.add(textFieldDataNascimento);
+		textFieldNome.setColumns(10);	
+		
+		ftextFieldDataNascimento = new JFormattedTextField();
+		ftextFieldDataNascimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		ftextFieldDataNascimento.setColumns(10);
+		ftextFieldDataNascimento.setBounds(210, 123, 366, 20);
+		try {
+			ftextFieldDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+		} catch (java.text.ParseException erro) {
+			erro.printStackTrace();
+		}		
+		contentPane.add(ftextFieldDataNascimento);
+		
+		
 
 		textFieldEndereco = new JTextField();
 		textFieldEndereco.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -145,10 +153,10 @@ public class Atualizar extends JFrame {
 				cliente.setSexo(String.valueOf(comboBoxSexo.getSelectedItem()));
 				cliente.setSaldo(Double.parseDouble(textFieldSaldo.getText()));
 
-				SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/YYYY");
-				java.sql.Date dataNascimento = null;
+				SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+				java.sql.Date dataNascimento=null;
 				try {
-					dataNascimento = new java.sql.Date(formatoData.parse(textFieldDataNascimento.getText()).getDate());
+					dataNascimento = new java.sql.Date(formatoData.parse(ftextFieldDataNascimento.getText()).getTime());
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
@@ -156,7 +164,7 @@ public class Atualizar extends JFrame {
 				cliente.setCodCliente(Integer.parseInt(textFieldCodigoCliente.getText()));
 				clienteDao.update(cliente);
 
-				textFieldDataNascimento.setText(formatoData.format(dataNascimento));
+				ftextFieldDataNascimento.setText(formatoData.format(dataNascimento));
 
 			}
 		});
@@ -199,7 +207,7 @@ public class Atualizar extends JFrame {
 					btnSalvar.setEnabled(false);
 					textFieldNome.setText("");
 					textFieldEndereco.setText("");
-					textFieldDataNascimento.setText("");
+					ftextFieldDataNascimento.setText("");
 					textFieldSaldo.setText("");
 					comboBoxSexo.setSelectedIndex(0);
 
@@ -209,9 +217,9 @@ public class Atualizar extends JFrame {
 					textFieldEndereco.setText(clienteAtualizar.getEndereco());
 					comboBoxSexo.setSelectedItem(clienteAtualizar.getSexo());
 					textFieldSaldo.setText(String.valueOf(clienteAtualizar.getSaldo()));
-					SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/YYYY");
+					SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
 					java.sql.Date dataNascimento = (Date) clienteAtualizar.getDataNascimento();
-					textFieldDataNascimento.setText(formatoData.format(dataNascimento));
+					ftextFieldDataNascimento.setText(formatoData.format(dataNascimento));
 
 					btnSalvar.setEnabled(true);
 				}

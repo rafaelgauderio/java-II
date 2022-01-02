@@ -7886,3 +7886,200 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.jface.text 2 0 2022-01-01 15:10:14.942
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+!SESSION 2022-01-01 16:49:47.470 -----------------------------------------------
+eclipse.buildId=4.11.0.I20190307-0500
+java.version=12.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.egit.core 1 0 2022-01-01 16:50:38.857
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.jface.text 2 0 2022-01-01 16:50:44.581
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-01-01 16:50:52.749
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\DeLuca Tigrao'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface.text 2 0 2022-01-01 16:54:55.314
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+!SESSION 2022-01-02 11:35:25.747 -----------------------------------------------
+eclipse.buildId=4.11.0.I20190307-0500
+java.version=12.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.egit.core 1 0 2022-01-02 11:35:42.506
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.jface.text 2 0 2022-01-02 11:35:52.209
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-01-02 11:36:01.121
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\DeLuca Tigrao'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.wb.core 4 4 2022-01-02 11:41:14.643
+!MESSAGE Designer [1.10.0.201812270937.202201021141]: java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.wb.core.eval.AstEvaluationEngine$1.runObject(AstEvaluationEngine.java:65)
+	at org.eclipse.wb.internal.core.utils.execution.ExecutionUtils.runObjectLog(ExecutionUtils.java:304)
+	at org.eclipse.wb.core.eval.AstEvaluationEngine.evaluate(AstEvaluationEngine.java:63)
+	at org.eclipse.wb.internal.swing.model.component.JTableInfo.evaluateColumnModelInvocations(JTableInfo.java:76)
+	at org.eclipse.wb.internal.swing.model.component.JTableInfo.access$0(JTableInfo.java:69)
+	at org.eclipse.wb.internal.swing.model.component.JTableInfo$1.evaluateAfter(JTableInfo.java:62)
+	at jdk.internal.reflect.GeneratedMethodAccessor98.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.eclipse.wb.core.model.broadcast.BroadcastSupport$1.intercept(BroadcastSupport.java:208)
+	at org.eclipse.wb.core.model.broadcast.EvaluationEventListener$$EnhancerByCGLIB$$32580469.evaluateAfter(<generated>)
+	at org.eclipse.wb.internal.core.parser.JavaInfoParser.evaluateNode(JavaInfoParser.java:1311)
+	at org.eclipse.wb.internal.core.parser.JavaInfoParser.access$1(JavaInfoParser.java:1300)
+	at org.eclipse.wb.internal.core.parser.JavaInfoParser$ExecutionFlowParseVisitor$3.run(JavaInfoParser.java:602)
+	at org.eclipse.wb.internal.core.utils.execution.ExecutionUtils.runRethrow(ExecutionUtils.java:119)
+	at org.eclipse.wb.internal.core.parser.JavaInfoParser$ExecutionFlowParseVisitor.postVisit(JavaInfoParser.java:592)
+	at jdk.internal.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils$1.intercept(ExecutionFlowUtils.java:399)
+	at org.eclipse.jdt.core.dom.ASTVisitor$$EnhancerByCGLIB$$e45fe7ae.postVisit(<generated>)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2818)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement0(ExecutionFlowUtils.java:354)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement(ExecutionFlowUtils.java:315)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement0(ExecutionFlowUtils.java:336)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement(ExecutionFlowUtils.java:315)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visit(ExecutionFlowUtils.java:247)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.access$1(ExecutionFlowUtils.java:235)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils$1.endVisit(ExecutionFlowUtils.java:442)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils$1.intercept(ExecutionFlowUtils.java:391)
+	at org.eclipse.jdt.core.dom.ASTVisitor$$EnhancerByCGLIB$$e45fe7ae.endVisit(<generated>)
+	at org.eclipse.jdt.core.dom.MethodInvocation.accept0(MethodInvocation.java:230)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2863)
+	at org.eclipse.jdt.core.dom.ExpressionStatement.accept0(ExpressionStatement.java:136)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement0(ExecutionFlowUtils.java:354)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement(ExecutionFlowUtils.java:315)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement0(ExecutionFlowUtils.java:336)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement(ExecutionFlowUtils.java:315)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visit(ExecutionFlowUtils.java:247)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visit(ExecutionFlowUtils.java:228)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils$1.endVisit(ExecutionFlowUtils.java:421)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils$1.intercept(ExecutionFlowUtils.java:389)
+	at org.eclipse.jdt.core.dom.ASTVisitor$$EnhancerByCGLIB$$e45fe7ae.endVisit(<generated>)
+	at org.eclipse.jdt.core.dom.ClassInstanceCreation.accept0(ClassInstanceCreation.java:307)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2863)
+	at org.eclipse.jdt.core.dom.VariableDeclarationFragment.accept0(VariableDeclarationFragment.java:238)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2886)
+	at org.eclipse.jdt.core.dom.VariableDeclarationStatement.accept0(VariableDeclarationStatement.java:254)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2886)
+	at org.eclipse.jdt.core.dom.Block.accept0(Block.java:128)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2863)
+	at org.eclipse.jdt.core.dom.TryStatement.accept0(TryStatement.java:274)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2886)
+	at org.eclipse.jdt.core.dom.Block.accept0(Block.java:128)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2863)
+	at org.eclipse.jdt.core.dom.MethodDeclaration.accept0(MethodDeclaration.java:617)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2886)
+	at org.eclipse.jdt.core.dom.AnonymousClassDeclaration.accept0(AnonymousClassDeclaration.java:135)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2863)
+	at org.eclipse.jdt.core.dom.ClassInstanceCreation.accept0(ClassInstanceCreation.java:305)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2886)
+	at org.eclipse.jdt.core.dom.MethodInvocation.accept0(MethodInvocation.java:228)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2863)
+	at org.eclipse.jdt.core.dom.ExpressionStatement.accept0(ExpressionStatement.java:136)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement0(ExecutionFlowUtils.java:354)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement(ExecutionFlowUtils.java:315)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement0(ExecutionFlowUtils.java:336)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visitStatement(ExecutionFlowUtils.java:315)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visit(ExecutionFlowUtils.java:247)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visit(ExecutionFlowUtils.java:228)
+	at org.eclipse.wb.core.eval.ExecutionFlowUtils.visit(ExecutionFlowUtils.java:191)
+	at org.eclipse.wb.internal.core.parser.JavaInfoParser.parseRootMethods(JavaInfoParser.java:312)
+	at org.eclipse.wb.internal.core.parser.JavaInfoParser.parse(JavaInfoParser.java:268)
+	at org.eclipse.wb.internal.core.parser.JavaInfoParser.access$9(JavaInfoParser.java:238)
+	at org.eclipse.wb.internal.core.parser.JavaInfoParser$1.runObject(JavaInfoParser.java:153)
+	at org.eclipse.wb.internal.core.parser.JavaInfoParser$1.runObject(JavaInfoParser.java:1)
+	at org.eclipse.wb.internal.core.utils.execution.ExecutionUtils.runDesignTime(ExecutionUtils.java:159)
+	at org.eclipse.wb.internal.core.parser.JavaInfoParser.parse(JavaInfoParser.java:151)
+	at org.eclipse.wb.internal.core.editor.DesignPage.internal_refreshGEF(DesignPage.java:534)
+	at org.eclipse.wb.internal.core.editor.DesignPage.access$9(DesignPage.java:522)
+	at org.eclipse.wb.internal.core.editor.DesignPage$8$1.run(DesignPage.java:449)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:147)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4580)
+	at org.eclipse.wb.internal.core.editor.DesignPage$8.run(DesignPage.java:446)
+	at org.eclipse.jface.operation.ModalContext.runInCurrentThread(ModalContext.java:438)
+	at org.eclipse.jface.operation.ModalContext.run(ModalContext.java:354)
+	at org.eclipse.jface.dialogs.ProgressMonitorDialog.run(ProgressMonitorDialog.java:469)
+	at org.eclipse.wb.internal.core.editor.DesignPage.internal_refreshGEF_withProgress(DesignPage.java:465)
+	at org.eclipse.wb.internal.core.editor.DesignPage.internal_refreshGEF(DesignPage.java:415)
+	at org.eclipse.wb.internal.core.editor.UndoManager.refreshDesignerEditor(UndoManager.java:381)
+	at org.eclipse.wb.internal.core.editor.UndoManager.activate(UndoManager.java:90)
+	at org.eclipse.wb.internal.core.editor.DesignPage.handleActiveState_True(DesignPage.java:263)
+	at org.eclipse.wb.internal.core.editor.DesignPage.handleActiveState(DesignPage.java:241)
+	at org.eclipse.wb.internal.core.editor.multi.DefaultMultiMode.showPage(DefaultMultiMode.java:125)
+	at org.eclipse.wb.internal.core.editor.multi.DefaultMultiMode$1.widgetSelected(DefaultMultiMode.java:63)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:252)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1079)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1064)
+	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:778)
+	at org.eclipse.swt.custom.CTabFolder.setSelection(CTabFolder.java:3193)
+	at org.eclipse.swt.custom.CTabFolder.onMouse(CTabFolder.java:1876)
+	at org.eclipse.swt.custom.CTabFolder.lambda$0(CTabFolder.java:330)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:566)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:661)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:597)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1476)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1449)
+
+!ENTRY org.eclipse.jface.text 2 0 2022-01-02 11:43:35.550
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
