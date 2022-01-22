@@ -20,6 +20,7 @@ public class AplicacaoConsole {
 		SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
 		java.sql.Date date = new java.sql.Date(sdf.parse("05/12/1995").getTime());
 		java.sql.Date date2 = new java.sql.Date(sdf.parse("08/01/1987").getTime());
+		
 		/*
 		System.out.println("\nTESTANDO INSERT");
 		Cliente clienteNovo = new Cliente(null,"Mariana De Luca ","Rua Sertorio 35, Apto: 25","F",date,3800.50);

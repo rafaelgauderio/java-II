@@ -17,7 +17,8 @@ import view.cadastro.Novo;
 import view.operacoes.Deposito;
 import view.operacoes.Saque;
 import view.operacoes.Transferencia;
-import view.relatorio.RelatorioGeral;
+import view.relatorio.RelatorioGeralTable;
+import view.relatorio.RelatorioGeralTextArea;
 import view.relatorio.RelatorioIndividual;
 import java.awt.Font;
 
@@ -180,12 +181,23 @@ public class Aplicacao {
 		});
 		
 		
-		JMenuItem relatorioTodosClientes = new JMenuItem("Todos os clientes");
+		JMenuItem relatorioTodosClientes = new JMenuItem("Todos os clientes (Area de texto)");
 		relatorioTodosClientes.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RelatorioGeral window = new RelatorioGeral();
+				RelatorioGeralTextArea window = new RelatorioGeralTextArea();
+				window.frame.setVisible(true);
+			}		
+			
+		});
+		
+		JMenuItem relatorioTodosClientesTable = new JMenuItem("Todos os clientes (Tabela)");
+		relatorioTodosClientesTable.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RelatorioGeralTable window = new RelatorioGeralTable();
 				window.frame.setVisible(true);
 			}		
 			
@@ -195,6 +207,7 @@ public class Aplicacao {
 
 		relatorio.add(relatorioIndividual);
 		relatorio.add(relatorioTodosClientes);
+		relatorio.add(relatorioTodosClientesTable);
 
 		JMenu ajuda = new JMenu("Ajuda");
 		ajuda.setFont(new Font("Segoe UI", Font.BOLD, 15));

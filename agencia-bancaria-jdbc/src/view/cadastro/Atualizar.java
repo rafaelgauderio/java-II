@@ -65,7 +65,7 @@ public class Atualizar extends JFrame {
 	public void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Atualiza\u00E7\u00E3o de Cliente");
-		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 600, 400);
 
 		contentPane = new JPanel();
@@ -176,7 +176,6 @@ public class Atualizar extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				frame.dispose();
 			}
 		});

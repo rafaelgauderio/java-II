@@ -54,7 +54,7 @@ public class Deposito extends JFrame {
 
 		frame = new JFrame();
 		frame.setTitle("Dep\u00F3sito");
-		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 600, 400);
 
 		contentPane = new JPanel();
@@ -96,8 +96,9 @@ public class Deposito extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
 				frame.dispose();
+				
 			}
 
 		});

@@ -57,7 +57,7 @@ public class RelatorioIndividual extends JFrame {
 
 		frame = new JFrame();
 		frame.setTitle("Relat\u00F3rio Individual de Cliente");
-		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 650, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
